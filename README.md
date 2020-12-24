@@ -1,6 +1,8 @@
-# Hello There <img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="30px"> 
- 
- 
-![Atul's github stats](https://github-readme-stats.vercel.app/api?username=codingwolf-at&count_private=true&show_icons=true&theme=tokyonight)
+# Hello There <img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="30px">
 
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=codingwolf-at)
+<p align="center">
+<img src="https://github-readme-stats.vercel.app/api?username=codingwolf-at&count_private=true&show_icons=true&theme=tokyonight">
+</p>
+<p align="center">
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=codingwolf-at">
+</p>
