@@ -1,4 +1,4 @@
 # Hello There <img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="30px"> 
  
  
-[![Atul's github stats](https://github-readme-stats.vercel.app/api?username=codingwolf-at&count_private=true&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
+[![Atul's github stats](https://github-readme-stats.vercel.app/api?username=codingwolf-at&count_private=true&show_icons=true&theme=tokyonight)](https://github.com/anuraghazra/github-readme-stats)
