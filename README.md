@@ -5,7 +5,7 @@
 </p>
 
 ## My name is Atul Tameshwari 👻
-People often know me by my pseudonym, codingWolf 🐺 I enjoy building responsive and eye pleasing websites/web apps. 
+People often know me by my pseudonym, **codingWolf** 🐺 I enjoy building responsive and eye pleasing websites/web apps. 
 
 - Currently focused on front end development using ReactJS 🤖
 - Practising DSA in JavaScript 🏆
