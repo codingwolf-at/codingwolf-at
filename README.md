@@ -4,7 +4,7 @@
 <img src="https://komarev.com/ghpvc/?username=codingwolf-at" width="100" height="30">
 </p>
 
-### My name is Atul Tameshwari 👻
+## My name is Atul Tameshwari 👻
 People often know me by my pseudonym, codingWolf 🐺 I enjoy building responsive and eye pleasing websites/web apps. 
 
 - Currently focused on front end development using ReactJS 🤖
