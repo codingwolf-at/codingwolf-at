@@ -9,7 +9,7 @@ People often know me by my pseudonym, **codingWolf** 🐺 I enjoy building respo
 
 - Currently focused on front end development using ReactJS 🤖
 - Practising DSA in JavaScript 🏆
-- I like to write and make tutorial videos for biginners 💻
+- I like to write and make tutorial videos for beginners 💻
 - __GOAL__ : Full stack Development 🦾 
 
 <p>
