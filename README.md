@@ -2,7 +2,7 @@
 
 ## My name is Atul Tameshwari 👻
 
-### Frontend Intern @ [inFeedo](https://www.infeedo.ai/)
+### Software Developer - Frontend @ [inFeedo](https://www.infeedo.ai/)
 
 ---
 
