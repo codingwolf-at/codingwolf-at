@@ -6,8 +6,6 @@
 
 ---
 
-People often know me by my pseudonym, **codingWolf** 🐺 I enjoy building responsive and eye pleasing websites/web apps. 
-
 - Currently focused on front end development using ReactJS 🤖
 - Practising DSA in JavaScript 🏆
 - I also write blogs intended to help fellow beginner devs on Hashnode 💻
