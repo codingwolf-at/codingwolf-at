@@ -1,9 +1,9 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f172a,50:1e3a8a,100:0ea5e9&height=200&section=header&text=Atul%20Tameshwari&fontColor=ffffff&fontSize=52&fontAlignY=38&desc=Frontend%20Engineer%20%C2%B7%20React%20%C2%B7%20AI-powered%20products&descAlignY=58&descSize=18&animation=fadeIn" width="100%" alt="Atul Tameshwari" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f172a,50:1e3a8a,100:0ea5e9&height=200&section=header&text=Atul%20Tameshwari&fontColor=ffffff&fontSize=52&fontAlignY=38&desc=Frontend%20Engineer%20at%20Plane%20%C2%B7%20Design%20systems%20%C2%B7%20AI-driven%20UX&descAlignY=58&descSize=18&animation=fadeIn" width="100%" alt="Atul Tameshwari" />
 
 <div align="center">
 
 <a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=20&pause=1000&color=0EA5E9&center=true&vCenter=true&width=600&lines=Building+scalable+React+applications;Designing+reusable+UI+systems;Shipping+AI-driven+workflows+to+production;Riding+bikes+in+the+hills+when+offline+%F0%9F%8F%8D%EF%B8%8F" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=20&pause=1000&color=0EA5E9&center=true&vCenter=true&width=600&lines=Building+interfaces+that+feel+inevitable;Rebuilding+Propel%2C+Plane's+design+system;Building+Tern%2C+a+native+macOS+app;Riding+bikes+in+the+hills+when+offline+%F0%9F%8F%8D%EF%B8%8F" alt="Typing SVG" />
 </a>
 
 <br/><br/>
@@ -17,29 +17,44 @@
 
 ## 👋 About me
 
-Frontend Engineer with **3+ years** of experience building scalable React applications in a B2B AI SaaS environment.
+I'm a Frontend Engineer at **[Plane](https://plane.so)** in Hyderabad, India, with **3+ years** of crafting design systems, dashboards and AI-driven UX with React, TypeScript and Next.js. An engineer with a designer's eye: fast, accessible, delightful.
 
-- 🧩 I build **reusable UI systems** and ship customer-facing features at scale
-- 🤖 I integrate **AI-driven workflows** into production and turn complex model output into usable interfaces
-- 🏗️ I care about **clean architecture**, usability and steady experimentation with modern web and AI tooling
+- 🎨 **Design systems:** I'm rebuilding Propel, Plane's design system, and earlier helped migrate inFeedo's UI to a shared one
+- ♿ **Accessibility:** WCAG target sizes, RTL support, ARIA semantics and contrast are part of the job, not an afterthought
+- ⚡ **Performance:** I watch Core Web Vitals and use code-splitting, memoization and lazy-loading so apps stay fast
+- 🤖 **AI-driven UX:** I've shipped AI features for enterprise HR SaaS, turning tens of millions of survey responses into insights
 
 ```ts
 const atul = {
-  role: "Frontend Engineer",
-  building: "HireTrack: a modern job application tracking dashboard",
-  learning: ["Next.js", "AI-enabled apps with OpenRouter"],
+  role: "Frontend Engineer @ Plane",
+  location: "Hyderabad, India",
+  focus: ["Design systems", "Accessibility", "Frontend architecture"],
   stack: ["React", "TypeScript", "Next.js", "Tailwind CSS"],
+  sideProject: "Tern: know when it's your turn",
   offline: "riding bikes in the hills 🏍️",
 };
 ```
 
-## 🚀 Currently
+## 💼 Experience
 
-| | |
-| --- | --- |
-| 🔭 **Building** | [**HireTrack**](https://github.com/codingwolf-at/hiretrack): a modern job application tracking dashboard |
-| 🌱 **Learning** | Next.js and AI-enabled apps with OpenRouter |
-| ⚡ **Fun fact** | I enjoy building clean interfaces almost as much as riding bikes in the hills |
+**Software Development Engineer, Frontend · [Plane](https://plane.so)** · _May 2026 – Present_
+- Rebuilt **Propel**, Plane's design system: redesigned 30+ React/TypeScript components against a new Figma spec, with WCAG target sizes, RTL support and accessible group semantics
+- Architected **`@plane/blocks`**, a shared component layer that unifies Plane's public Space surface with the main web app
+- Consolidated duplicated component and store code between Plane's community and core editions into a single shared tree
+
+**Software Developer, Frontend · [inFeedo.ai](https://www.infeedo.ai)** · _Mar 2022 – Mar 2025_ (intern until May 2022)
+- Helped build and scale a shared design system and migrated most UI components to it
+- Shipped AI-driven features for an enterprise HR SaaS used by hundreds of CHROs, with insights from tens of millions of responses
+- Led dashboard architecture improvements and owned production issues end to end
+
+## 🚀 Featured projects
+
+| Project | What it is | Built with |
+| --- | --- | --- |
+| 🐦 [**Tern**](https://github.com/codingwolf-at/tern) · [site](https://tern-site.vercel.app) | Native macOS menu bar app that tells you when it's your turn across GitHub, Plane, AI agents and Calendar | Swift, SwiftUI |
+| 📋 [**HireTrack**](https://github.com/codingwolf-at/hiretrack) · [live](https://hiretrack-ruddy.vercel.app) | Job application tracking dashboard with auth, live metrics and pipeline stages | Next.js, TypeScript, Supabase |
+| 🔍 [**ReviewUI**](https://github.com/codingwolf-at/ai-ui-reviewer) · [live](https://ai-ui-reviewer.vercel.app) | Reviews UI code and screenshots with AI and returns UX, accessibility and code-quality feedback | Next.js, OpenRouter AI |
+| 🌙 [**Crescent UI**](https://github.com/codingwolf-at/crescent-ui) · [live](https://crescent-ui.netlify.app) | Lightweight CSS component library served from a CDN, with no framework lock-in | HTML, CSS |
 
 ## 🛠️ Tech stack
 
@@ -47,11 +62,11 @@ const atul = {
 
 **Frontend**
 
-<img src="https://skillicons.dev/icons?i=react,nextjs,ts,js,redux,tailwind,sass,html,css&perline=9" alt="Frontend stack" />
+<img src="https://skillicons.dev/icons?i=react,nextjs,ts,js,tailwind,sass,html,css&perline=8" alt="Frontend stack" />
 
-**Backend, testing and tools**
+**Backend, native and tools**
 
-<img src="https://skillicons.dev/icons?i=nodejs,express,firebase,jest,git,github,figma,vercel&perline=8" alt="Backend and tools" />
+<img src="https://skillicons.dev/icons?i=nodejs,supabase,swift,vite,vitest,git,github,figma,vercel&perline=9" alt="Backend, native and tools" />
 
 </div>
 
