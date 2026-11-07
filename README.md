@@ -59,12 +59,12 @@ const atul = {
 
 <div align="center">
 
-<img height="170" src="https://github-readme-stats.vercel.app/api?username=codingwolf-at&show_icons=true&hide_border=true&theme=tokyonight&include_all_commits=true&count_private=true" alt="GitHub stats" />
-<img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=codingwolf-at&layout=compact&hide_border=true&theme=tokyonight&langs_count=8" alt="Top languages" />
+<img height="180" src="./assets/github-stats.svg" alt="GitHub stats" />
+<img height="180" src="./assets/top-languages.svg" alt="Top languages" />
 
 <img src="https://streak-stats.demolab.com?user=codingwolf-at&theme=tokyonight&hide_border=true" alt="GitHub streak" />
 
-<img width="100%" src="https://github-readme-activity-graph.vercel.app/graph?username=codingwolf-at&theme=tokyo-night&hide_border=true&area=true" alt="Contribution graph" />
+<img width="100%" src="./assets/activity-graph.svg" alt="Contribution graph" />
 
 </div>
 
