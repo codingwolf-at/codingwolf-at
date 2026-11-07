@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="850" height="300" viewBox="0 0 850 300" role="img" aria-label="Atul Tameshwari&#39;s contribution graph (last 31 days)">
+  <style>
+    .title { font: 600 18px 'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif; fill: #70a5fd; }
+    .label { font: 600 14px 'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif; fill: #38bdae; }
+    .value { font: 700 14px 'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif; fill: #a9b1d6; }
+    .small { font: 400 12px 'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif; fill: #a9b1d6; }
+    .fade { opacity: 0; animation: fadeIn 0.4s ease-in-out forwards; }
+    @keyframes fadeIn { to { opacity: 1; } }
+  </style>
+  <rect x="0.5" y="0.5" rx="6" width="849" height="299" fill="#1a1b27" stroke="#2a2e45"/>
+  <text x="25" y="35" class="title">Atul Tameshwari&#39;s contribution graph (last 31 days)</text>
+  <defs>
+    <linearGradient id="fill" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#70a5fd" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#70a5fd" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <line x1="50" x2="820" y1="255.0" y2="255.0" stroke="#2a2e45"/>
+  <text x="40" y="255.0" class="small" text-anchor="end" dominant-baseline="middle">0</text>
+  <line x1="50" x2="820" y1="206.3" y2="206.3" stroke="#2a2e45"/>
+  <text x="40" y="206.3" class="small" text-anchor="end" dominant-baseline="middle">5</text>
+  <line x1="50" x2="820" y1="157.5" y2="157.5" stroke="#2a2e45"/>
+  <text x="40" y="157.5" class="small" text-anchor="end" dominant-baseline="middle">10</text>
+  <line x1="50" x2="820" y1="108.8" y2="108.8" stroke="#2a2e45"/>
+  <text x="40" y="108.8" class="small" text-anchor="end" dominant-baseline="middle">15</text>
+  <line x1="50" x2="820" y1="60.0" y2="60.0" stroke="#2a2e45"/>
+  <text x="40" y="60.0" class="small" text-anchor="end" dominant-baseline="middle">20</text>
+  <g class="fade" style="animation-delay:150ms">
+    <polygon points="50,255 50.0,89.3 75.7,216.0 101.3,255.0 127.0,206.3 152.7,69.8 178.3,118.5 204.0,157.5 229.7,177.0 255.3,118.5 281.0,255.0 306.7,235.5 332.3,216.0 358.0,255.0 383.7,196.5 409.3,196.5 435.0,255.0 460.7,255.0 486.3,255.0 512.0,216.0 537.7,225.8 563.3,108.8 589.0,245.3 614.7,245.3 640.3,255.0 666.0,255.0 691.7,177.0 717.3,128.3 743.0,196.5 768.7,225.8 794.3,206.3 820.0,235.5 820.0,255" fill="url(#fill)"/>
+    <polyline points="50.0,89.3 75.7,216.0 101.3,255.0 127.0,206.3 152.7,69.8 178.3,118.5 204.0,157.5 229.7,177.0 255.3,118.5 281.0,255.0 306.7,235.5 332.3,216.0 358.0,255.0 383.7,196.5 409.3,196.5 435.0,255.0 460.7,255.0 486.3,255.0 512.0,216.0 537.7,225.8 563.3,108.8 589.0,245.3 614.7,245.3 640.3,255.0 666.0,255.0 691.7,177.0 717.3,128.3 743.0,196.5 768.7,225.8 794.3,206.3 820.0,235.5" fill="none" stroke="#70a5fd" stroke-width="2.5" stroke-linejoin="round"/>
+    <circle cx="50.0" cy="89.3" r="3" fill="#bf91f3"/><circle cx="75.7" cy="216.0" r="3" fill="#bf91f3"/><circle cx="101.3" cy="255.0" r="3" fill="#bf91f3"/><circle cx="127.0" cy="206.3" r="3" fill="#bf91f3"/><circle cx="152.7" cy="69.8" r="3" fill="#bf91f3"/><circle cx="178.3" cy="118.5" r="3" fill="#bf91f3"/><circle cx="204.0" cy="157.5" r="3" fill="#bf91f3"/><circle cx="229.7" cy="177.0" r="3" fill="#bf91f3"/><circle cx="255.3" cy="118.5" r="3" fill="#bf91f3"/><circle cx="281.0" cy="255.0" r="3" fill="#bf91f3"/><circle cx="306.7" cy="235.5" r="3" fill="#bf91f3"/><circle cx="332.3" cy="216.0" r="3" fill="#bf91f3"/><circle cx="358.0" cy="255.0" r="3" fill="#bf91f3"/><circle cx="383.7" cy="196.5" r="3" fill="#bf91f3"/><circle cx="409.3" cy="196.5" r="3" fill="#bf91f3"/><circle cx="435.0" cy="255.0" r="3" fill="#bf91f3"/><circle cx="460.7" cy="255.0" r="3" fill="#bf91f3"/><circle cx="486.3" cy="255.0" r="3" fill="#bf91f3"/><circle cx="512.0" cy="216.0" r="3" fill="#bf91f3"/><circle cx="537.7" cy="225.8" r="3" fill="#bf91f3"/><circle cx="563.3" cy="108.8" r="3" fill="#bf91f3"/><circle cx="589.0" cy="245.3" r="3" fill="#bf91f3"/><circle cx="614.7" cy="245.3" r="3" fill="#bf91f3"/><circle cx="640.3" cy="255.0" r="3" fill="#bf91f3"/><circle cx="666.0" cy="255.0" r="3" fill="#bf91f3"/><circle cx="691.7" cy="177.0" r="3" fill="#bf91f3"/><circle cx="717.3" cy="128.3" r="3" fill="#bf91f3"/><circle cx="743.0" cy="196.5" r="3" fill="#bf91f3"/><circle cx="768.7" cy="225.8" r="3" fill="#bf91f3"/><circle cx="794.3" cy="206.3" r="3" fill="#bf91f3"/><circle cx="820.0" cy="235.5" r="3" fill="#bf91f3"/>
+  </g>
+  <text x="50.0" y="280" class="small" text-anchor="middle">8</text>
+  <text x="178.3" y="280" class="small" text-anchor="middle">13</text>
+  <text x="306.7" y="280" class="small" text-anchor="middle">18</text>
+  <text x="435.0" y="280" class="small" text-anchor="middle">23</text>
+  <text x="563.3" y="280" class="small" text-anchor="middle">28</text>
+  <text x="691.7" y="280" class="small" text-anchor="middle">2</text>
+  <text x="820.0" y="280" class="small" text-anchor="middle">7</text>
+  <text x="425" y="296" class="small" text-anchor="middle">Days</text>
+</svg>
