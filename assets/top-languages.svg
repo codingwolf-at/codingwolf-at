@@ -1,46 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="350" height="215" viewBox="0 0 350 215" role="img" aria-label="Most used languages">
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="270" viewBox="0 0 400 270" role="img" aria-label="Top languages">
   <style>
-    .title { font: 600 18px 'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif; fill: #70a5fd; }
-    .label { font: 600 14px 'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif; fill: #38bdae; }
-    .value { font: 700 14px 'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif; fill: #a9b1d6; }
-    .small { font: 400 12px 'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif; fill: #a9b1d6; }
-    .fade { opacity: 0; animation: fadeIn 0.4s ease-in-out forwards; }
-    @keyframes fadeIn { to { opacity: 1; } }
+    .label { font: 500 12px ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; fill: #71717a; letter-spacing: 1.5px; text-transform: uppercase; }
+    .num { font: 650 30px -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif; fill: #fafafa; letter-spacing: -1px; }
+    .text { font: 400 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif; fill: #a1a1aa; }
+    .mono { font: 400 12px ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; fill: #71717a; }
+    .rise { opacity: 0; animation: rise 0.6s cubic-bezier(0.21, 0.47, 0.32, 0.98) forwards; }
+    @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .rise { animation: none; opacity: 1; } }
   </style>
-  <rect x="0.5" y="0.5" rx="6" width="349" height="214" fill="#1a1b27" stroke="#2a2e45"/>
-  <text x="25" y="35" class="title">Most used languages</text>
-  <clipPath id="bar"><rect x="0" y="0" width="300" height="8" rx="4"/></clipPath>
-  <g clip-path="url(#bar)" transform="translate(25, 55)"><rect x="0.00" y="0" width="137.69" height="8" fill="#F05138"/><rect x="137.69" y="0" width="71.31" height="8" fill="#f1e05a"/><rect x="209.00" y="0" width="43.41" height="8" fill="#3178c6"/><rect x="252.41" y="0" width="31.72" height="8" fill="#e34c26"/><rect x="284.13" y="0" width="12.02" height="8" fill="#663399"/><rect x="296.15" y="0" width="3.00" height="8" fill="#89e051"/><rect x="299.14" y="0" width="0.57" height="8" fill="#4F5D95"/><rect x="299.71" y="0" width="0.29" height="8" fill="#3572A5"/></g>
-  <g class="fade" style="animation-delay:150ms" transform="translate(25, 85)">
-    <circle cx="5" cy="-4" r="5" fill="#F05138"/>
-    <text x="16" y="0" class="small">Swift 45.9%</text>
-  </g>
-  <g class="fade" style="animation-delay:250ms" transform="translate(185, 85)">
-    <circle cx="5" cy="-4" r="5" fill="#f1e05a"/>
-    <text x="16" y="0" class="small">JavaScript 23.8%</text>
-  </g>
-  <g class="fade" style="animation-delay:350ms" transform="translate(25, 110)">
-    <circle cx="5" cy="-4" r="5" fill="#3178c6"/>
-    <text x="16" y="0" class="small">TypeScript 14.5%</text>
-  </g>
-  <g class="fade" style="animation-delay:450ms" transform="translate(185, 110)">
-    <circle cx="5" cy="-4" r="5" fill="#e34c26"/>
-    <text x="16" y="0" class="small">HTML 10.6%</text>
-  </g>
-  <g class="fade" style="animation-delay:550ms" transform="translate(25, 135)">
-    <circle cx="5" cy="-4" r="5" fill="#663399"/>
-    <text x="16" y="0" class="small">CSS 4.0%</text>
-  </g>
-  <g class="fade" style="animation-delay:650ms" transform="translate(185, 135)">
-    <circle cx="5" cy="-4" r="5" fill="#89e051"/>
-    <text x="16" y="0" class="small">Shell 1.0%</text>
-  </g>
-  <g class="fade" style="animation-delay:750ms" transform="translate(25, 160)">
-    <circle cx="5" cy="-4" r="5" fill="#4F5D95"/>
-    <text x="16" y="0" class="small">PHP 0.2%</text>
-  </g>
-  <g class="fade" style="animation-delay:850ms" transform="translate(185, 160)">
-    <circle cx="5" cy="-4" r="5" fill="#3572A5"/>
-    <text x="16" y="0" class="small">Python 0.1%</text>
-  </g>
+  <defs>
+    <linearGradient id="ember" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#ffb36b"/>
+      <stop offset="100%" stop-color="#ff5a36"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="100%" cy="0%" r="70%">
+      <stop offset="0%" stop-color="#ff7a45" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#ff7a45" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect x="0.5" y="0.5" rx="14" width="399" height="269" fill="#111113" stroke="#232327"/>
+  <rect x="0.5" y="0.5" rx="14" width="399" height="269" fill="url(#glow)"/>
+  <circle cx="28" cy="32" r="3" fill="#ff7a45"/>
+  <text x="40" y="36" class="label">Top languages</text>
+  <g transform="translate(28, 66)"><rect x="0.00" y="0" width="155.34" height="10" rx="2" fill="#ff7a45"/><rect x="158.34" y="0" width="79.00" height="10" rx="2" fill="#ffa06e"/><rect x="240.34" y="0" width="46.92" height="10" rx="2" fill="#ffc59d"/><rect x="290.26" y="0" width="33.48" height="10" rx="2" fill="#d4d4d8"/><rect x="326.74" y="0" width="10.82" height="10" rx="2" fill="#a1a1aa"/><rect x="340.55" y="0" width="2.00" height="10" rx="2" fill="#71717a"/></g>
+  <g transform="translate(28, 122)"><g class="rise" style="animation-delay:100ms">
+    <rect x="0" y="-9" width="10" height="10" rx="2" fill="#ff7a45"/>
+    <text x="20" y="0" class="text" style="fill:#fafafa">Swift</text>
+    <text x="164" y="0" class="mono" text-anchor="end">46.0%</text>
+  </g></g>
+  <g transform="translate(208, 122)"><g class="rise" style="animation-delay:170ms">
+    <rect x="0" y="-9" width="10" height="10" rx="2" fill="#ffa06e"/>
+    <text x="20" y="0" class="text" style="fill:#fafafa">JavaScript</text>
+    <text x="164" y="0" class="mono" text-anchor="end">23.8%</text>
+  </g></g>
+  <g transform="translate(28, 162)"><g class="rise" style="animation-delay:240ms">
+    <rect x="0" y="-9" width="10" height="10" rx="2" fill="#ffc59d"/>
+    <text x="20" y="0" class="text" style="fill:#fafafa">TypeScript</text>
+    <text x="164" y="0" class="mono" text-anchor="end">14.5%</text>
+  </g></g>
+  <g transform="translate(208, 162)"><g class="rise" style="animation-delay:310ms">
+    <rect x="0" y="-9" width="10" height="10" rx="2" fill="#d4d4d8"/>
+    <text x="20" y="0" class="text" style="fill:#fafafa">HTML</text>
+    <text x="164" y="0" class="mono" text-anchor="end">10.6%</text>
+  </g></g>
+  <g transform="translate(28, 202)"><g class="rise" style="animation-delay:380ms">
+    <rect x="0" y="-9" width="10" height="10" rx="2" fill="#a1a1aa"/>
+    <text x="20" y="0" class="text" style="fill:#fafafa">CSS</text>
+    <text x="164" y="0" class="mono" text-anchor="end">4.0%</text>
+  </g></g>
+  <g transform="translate(208, 202)"><g class="rise" style="animation-delay:450ms">
+    <rect x="0" y="-9" width="10" height="10" rx="2" fill="#71717a"/>
+    <text x="20" y="0" class="text" style="fill:#fafafa">Shell</text>
+    <text x="164" y="0" class="mono" text-anchor="end">1.0%</text>
+  </g></g>
 </svg>
