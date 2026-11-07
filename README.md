@@ -1,28 +1,22 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f172a,50:1e3a8a,100:0ea5e9&height=200&section=header&text=Atul%20Tameshwari&fontColor=ffffff&fontSize=52&fontAlignY=38&desc=Frontend%20Engineer%20at%20Plane%20%C2%B7%20Design%20systems%20%C2%B7%20AI-driven%20UX&descAlignY=58&descSize=18&animation=fadeIn" width="100%" alt="Atul Tameshwari" />
+<a href="https://atul-portfolio-v3.vercel.app/"><img src="./assets/header.svg" width="100%" alt="Atul Tameshwari, Frontend Engineer at Plane. Building interfaces that feel inevitable." /></a>
 
 <div align="center">
 
-<a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=20&pause=1000&color=0EA5E9&center=true&vCenter=true&width=600&lines=Building+interfaces+that+feel+inevitable;Rebuilding+Propel%2C+Plane's+design+system;Building+Tern%2C+a+native+macOS+app;Riding+bikes+in+the+hills+when+offline+%F0%9F%8F%8D%EF%B8%8F" alt="Typing SVG" />
-</a>
-
-<br/><br/>
-
-<a href="https://atul-portfolio-v3.vercel.app/"><img src="https://img.shields.io/badge/Portfolio-0f172a?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio" /></a>
-<a href="https://linkedin.com/in/atul-tameshwari"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
-<a href="https://x.com/atulT09"><img src="https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white" alt="X" /></a>
-<a href="https://instagram.com/atul.jsx"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" /></a>
+<a href="https://atul-portfolio-v3.vercel.app/"><img src="https://img.shields.io/badge/Portfolio-18181b?style=for-the-badge&logo=vercel&logoColor=fafafa" alt="Portfolio" /></a>
+<a href="https://linkedin.com/in/atul-tameshwari"><img src="https://img.shields.io/badge/LinkedIn-18181b?style=for-the-badge&logo=linkedin&logoColor=fafafa" alt="LinkedIn" /></a>
+<a href="https://x.com/atulT09"><img src="https://img.shields.io/badge/X-18181b?style=for-the-badge&logo=x&logoColor=fafafa" alt="X" /></a>
+<a href="https://instagram.com/atul.jsx"><img src="https://img.shields.io/badge/Instagram-18181b?style=for-the-badge&logo=instagram&logoColor=fafafa" alt="Instagram" /></a>
 
 </div>
 
-## 👋 About me
+## About me
 
 I'm a Frontend Engineer at **[Plane](https://plane.so)** in Hyderabad, India, with **3+ years** of crafting design systems, dashboards and AI-driven UX with React, TypeScript and Next.js. An engineer with a designer's eye: fast, accessible, delightful.
 
-- 🎨 **Design systems:** I'm rebuilding Propel, Plane's design system, and earlier helped migrate inFeedo's UI to a shared one
-- ♿ **Accessibility:** WCAG target sizes, RTL support, ARIA semantics and contrast are part of the job, not an afterthought
-- ⚡ **Performance:** I watch Core Web Vitals and use code-splitting, memoization and lazy-loading so apps stay fast
-- 🤖 **AI-driven UX:** I've shipped AI features for enterprise HR SaaS, turning tens of millions of survey responses into insights
+- **Design systems:** I'm rebuilding Propel, Plane's design system, and earlier helped migrate inFeedo's UI to a shared one
+- **Accessibility:** WCAG target sizes, RTL support, ARIA semantics and contrast are part of the job, not an afterthought
+- **Performance:** I watch Core Web Vitals and use code-splitting, memoization and lazy-loading so apps stay fast
+- **AI-driven UX:** I've shipped AI features for enterprise HR SaaS, turning tens of millions of survey responses into insights
 
 ```ts
 const atul = {
@@ -35,7 +29,7 @@ const atul = {
 };
 ```
 
-## 💼 Experience
+## Experience
 
 **Software Development Engineer, Frontend · [Plane](https://plane.so)** · _May 2026 – Present_
 - Rebuilt **Propel**, Plane's design system: redesigned 30+ React/TypeScript components against a new Figma spec, with WCAG target sizes, RTL support and accessible group semantics
@@ -47,37 +41,37 @@ const atul = {
 - Shipped AI-driven features for an enterprise HR SaaS used by hundreds of CHROs, with insights from tens of millions of responses
 - Led dashboard architecture improvements and owned production issues end to end
 
-## 🚀 Featured projects
+## Featured projects
 
 | Project | What it is | Built with |
 | --- | --- | --- |
-| 🐦 [**Tern**](https://github.com/codingwolf-at/tern) · [site](https://tern-site.vercel.app) | Native macOS menu bar app that tells you when it's your turn across GitHub, Plane, AI agents and Calendar | Swift, SwiftUI |
-| 📋 [**HireTrack**](https://github.com/codingwolf-at/hiretrack) · [live](https://hiretrack-ruddy.vercel.app) | Job application tracking dashboard with auth, live metrics and pipeline stages | Next.js, TypeScript, Supabase |
-| 🔍 [**ReviewUI**](https://github.com/codingwolf-at/ai-ui-reviewer) · [live](https://ai-ui-reviewer.vercel.app) | Reviews UI code and screenshots with AI and returns UX, accessibility and code-quality feedback | Next.js, OpenRouter AI |
-| 🌙 [**Crescent UI**](https://github.com/codingwolf-at/crescent-ui) · [live](https://crescent-ui.netlify.app) | Lightweight CSS component library served from a CDN, with no framework lock-in | HTML, CSS |
+| [**Tern**](https://github.com/codingwolf-at/tern) · [site](https://tern-site.vercel.app) | Native macOS menu bar app that tells you when it's your turn across GitHub, Plane, AI agents and Calendar | Swift, SwiftUI |
+| [**HireTrack**](https://github.com/codingwolf-at/hiretrack) · [live](https://hiretrack-ruddy.vercel.app) | Job application tracking dashboard with auth, live metrics and pipeline stages | Next.js, TypeScript, Supabase |
+| [**ReviewUI**](https://github.com/codingwolf-at/ai-ui-reviewer) · [live](https://ai-ui-reviewer.vercel.app) | Reviews UI code and screenshots with AI and returns UX, accessibility and code-quality feedback | Next.js, OpenRouter AI |
+| [**Crescent UI**](https://github.com/codingwolf-at/crescent-ui) · [live](https://crescent-ui.netlify.app) | Lightweight CSS component library served from a CDN, with no framework lock-in | HTML, CSS |
 
-## 🛠️ Tech stack
+## Tech stack
 
 <div align="center">
 
 **Frontend**
 
-<img src="https://skillicons.dev/icons?i=react,nextjs,ts,js,tailwind,sass,html,css&perline=8" alt="Frontend stack" />
+<img src="https://skillicons.dev/icons?i=react,nextjs,ts,js,tailwind,sass,html,css&perline=8&theme=dark" alt="Frontend stack" />
 
 **Backend, native and tools**
 
-<img src="https://skillicons.dev/icons?i=nodejs,supabase,swift,vite,vitest,git,github,figma,vercel&perline=9" alt="Backend, native and tools" />
+<img src="https://skillicons.dev/icons?i=nodejs,supabase,swift,vite,vitest,git,github,figma,vercel&perline=9&theme=dark" alt="Backend, native and tools" />
 
 </div>
 
-## 📊 GitHub stats
+## Activity
 
 <div align="center">
 
-<img height="180" src="./assets/github-stats.svg" alt="GitHub stats" />
-<img height="180" src="./assets/top-languages.svg" alt="Top languages" />
+<img width="49%" src="./assets/github-stats.svg" alt="GitHub stats" />
+<img width="49%" src="./assets/top-languages.svg" alt="Top languages" />
 
-<img src="https://streak-stats.demolab.com?user=codingwolf-at&theme=tokyonight&hide_border=true" alt="GitHub streak" />
+<img src="https://streak-stats.demolab.com?user=codingwolf-at&hide_border=true&border_radius=14&background=111113&stroke=232327&ring=FF7A45&fire=FF7A45&currStreakNum=FAFAFA&sideNums=FAFAFA&currStreakLabel=FF7A45&sideLabels=A1A1AA&dates=71717A" width="100%" alt="GitHub streak" />
 
 <img width="100%" src="./assets/activity-graph.svg" alt="Contribution graph" />
 
@@ -85,8 +79,7 @@ const atul = {
 
 <div align="center">
 
-<img src="https://komarev.com/ghpvc/?username=codingwolf-at&style=flat-square&color=0ea5e9&label=Profile+views" alt="Profile views" />
+<img src="https://komarev.com/ghpvc/?username=codingwolf-at&style=flat-square&color=ff7a45&labelColor=18181b&label=profile+views" alt="Profile views" />
 
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0ea5e9,50:1e3a8a,100:0f172a&height=120&section=footer" width="100%" alt="" />
