@@ -1,20 +1,29 @@
-// Generates the GitHub stats, top languages and activity graph SVGs for the profile README.
+// Generates the header banner, GitHub stats, top languages and activity graph SVGs for the profile README.
 // Runs in the "Profile stats" workflow. Needs GITHUB_TOKEN; GITHUB_USER defaults to the repo owner.
 import { mkdir, writeFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 
 const OUT_DIR = "assets";
 
+// Near-black, monochrome surfaces with a single warm "ember" accent.
 const THEME = {
-  bg: "#1a1b27",
-  border: "#2a2e45",
-  title: "#70a5fd",
-  text: "#38bdae",
-  muted: "#a9b1d6",
-  icon: "#bf91f3",
-  grid: "#2a2e45",
+  bg: "#0a0a0b",
+  surface: "#111113",
+  border: "#232327",
+  grid: "#1c1c20",
+  text: "#fafafa",
+  muted: "#a1a1aa",
+  subtle: "#71717a",
+  accent: "#ff7a45",
+  accentFrom: "#ffb36b",
+  accentTo: "#ff5a36",
+  live: "#34d399",
 };
-const FONT = "'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif";
+const SANS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif";
+const MONO = "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace";
+const SERIF = "'Instrument Serif', 'Iowan Old Style', Georgia, 'Times New Roman', serif";
+// Language bar and legend use one warm ramp instead of GitHub's rainbow of language colors.
+const RAMP = ["#ff7a45", "#ffa06e", "#ffc59d", "#d4d4d8", "#a1a1aa", "#71717a"];
 
 const QUERY = `
 query ($login: String!, $after: String) {
@@ -95,64 +104,138 @@ export async function fetchData(token, login) {
 const esc = (s) =>
   String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const fmt = (n) => new Intl.NumberFormat("en-US").format(n);
+const compact = (n) => new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 }).format(n);
 
-function card(width, height, title, body) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(title)}">
-  <style>
-    .title { font: 600 18px ${FONT}; fill: ${THEME.title}; }
-    .label { font: 600 14px ${FONT}; fill: ${THEME.text}; }
-    .value { font: 700 14px ${FONT}; fill: ${THEME.muted}; }
-    .small { font: 400 12px ${FONT}; fill: ${THEME.muted}; }
-    .fade { opacity: 0; animation: fadeIn 0.4s ease-in-out forwards; }
-    @keyframes fadeIn { to { opacity: 1; } }
+const BASE_STYLE = `
+    .label { font: 500 12px ${MONO}; fill: ${THEME.subtle}; letter-spacing: 1.5px; text-transform: uppercase; }
+    .num { font: 650 30px ${SANS}; fill: ${THEME.text}; letter-spacing: -1px; }
+    .text { font: 400 13px ${SANS}; fill: ${THEME.muted}; }
+    .mono { font: 400 12px ${MONO}; fill: ${THEME.subtle}; }
+    .rise { opacity: 0; animation: rise 0.6s cubic-bezier(0.21, 0.47, 0.32, 0.98) forwards; }
+    @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .rise { animation: none; opacity: 1; } }`;
+
+function card(width, height, label, body, { extraStyle = "", defs = "" } = {}) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(label)}">
+  <style>${BASE_STYLE}${extraStyle}
   </style>
-  <rect x="0.5" y="0.5" rx="6" width="${width - 1}" height="${height - 1}" fill="${THEME.bg}" stroke="${THEME.border}"/>
-  <text x="25" y="35" class="title">${esc(title)}</text>
+  <defs>
+    <linearGradient id="ember" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="${THEME.accentFrom}"/>
+      <stop offset="100%" stop-color="${THEME.accentTo}"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="100%" cy="0%" r="70%">
+      <stop offset="0%" stop-color="${THEME.accent}" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="${THEME.accent}" stop-opacity="0"/>
+    </radialGradient>${defs}
+  </defs>
+  <rect x="0.5" y="0.5" rx="14" width="${width - 1}" height="${height - 1}" fill="${THEME.surface}" stroke="${THEME.border}"/>
+  <rect x="0.5" y="0.5" rx="14" width="${width - 1}" height="${height - 1}" fill="url(#glow)"/>
+  <circle cx="28" cy="32" r="3" fill="${THEME.accent}"/>
+  <text x="40" y="36" class="label">${esc(label)}</text>
 ${body}
 </svg>
 `;
 }
 
-const ICONS = {
-  star: "M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z",
-  commit: "M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z",
-  pr: "M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354Z",
-  issue: "M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z",
-  repo: "M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.25.25 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z",
-  people: "M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.508 5.508 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.493 3.493 0 0 1 2 5.5ZM11 4a3.001 3.001 0 0 1 2.22 5.018 5.01 5.01 0 0 1 2.56 3.012.749.749 0 0 1-.885.954.752.752 0 0 1-.549-.514 3.507 3.507 0 0 0-2.522-2.372.75.75 0 0 1-.574-.73v-.352a.75.75 0 0 1 .416-.672A1.5 1.5 0 0 0 11 5.5.75.75 0 0 1 11 4Zm-5.5-.5a2 2 0 1 0-.001 3.999A2 2 0 0 0 5.5 3.5Z",
-};
+export function renderHeader() {
+  const w = 1000;
+  const h = 360;
+  const rings = [60, 100, 140, 180]
+    .map((r, i) => `<circle cx="850" cy="180" r="${r}" fill="none" stroke="${THEME.text}" stroke-opacity="${0.09 - i * 0.015}"/>`)
+    .join("\n    ");
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="Atul Tameshwari, Frontend Engineer at Plane. Building interfaces that feel inevitable.">
+  <style>
+    .pill { font: 500 17px ${SANS}; fill: ${THEME.muted}; }
+    .name { font: 700 76px ${SANS}; fill: ${THEME.text}; letter-spacing: -3px; }
+    .tag { font: 400 34px ${SANS}; fill: ${THEME.muted}; letter-spacing: -0.5px; }
+    .serif { font: italic 400 38px ${SERIF}; }
+    .meta { font: 400 17px ${MONO}; fill: ${THEME.subtle}; letter-spacing: 0.5px; }
+    .rise { opacity: 0; animation: rise 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98) forwards; }
+    .pulse { animation: pulse 2s ease-in-out infinite; transform-origin: 77px 74px; }
+    .orbit { animation: spin 18s linear infinite; transform-origin: 850px 180px; }
+    .orbit2 { animation: spin 30s linear infinite reverse; transform-origin: 850px 180px; }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .rise, .pulse, .orbit, .orbit2 { animation: none; opacity: 1; } }
+  </style>
+  <defs>
+    <linearGradient id="ember" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="${THEME.accentFrom}"/>
+      <stop offset="100%" stop-color="${THEME.accentTo}"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="88%" cy="0%" r="75%">
+      <stop offset="0%" stop-color="${THEME.accent}" stop-opacity="0.28"/>
+      <stop offset="45%" stop-color="${THEME.accent}" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="${THEME.accent}" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="${THEME.text}" fill-opacity="0.07"/>
+    </pattern>
+    <linearGradient id="fadeX" x1="0" x2="1">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="1"/>
+    </linearGradient>
+    <mask id="fade"><rect width="${w}" height="${h}" fill="url(#fadeX)"/></mask>
+    <clipPath id="frame"><rect x="0.5" y="0.5" rx="20" width="${w - 1}" height="${h - 1}"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="${w}" height="${h}" fill="${THEME.bg}"/>
+    <rect width="${w}" height="${h}" fill="url(#dots)" mask="url(#fade)"/>
+    <rect width="${w}" height="${h}" fill="url(#glow)"/>
+    ${rings}
+    <g class="orbit"><circle cx="850" cy="40" r="5" fill="${THEME.accent}"/><circle cx="850" cy="40" r="12" fill="${THEME.accent}" fill-opacity="0.18"/></g>
+    <g class="orbit2"><circle cx="850" cy="280" r="3" fill="${THEME.text}" fill-opacity="0.5"/></g>
+  </g>
+  <rect x="0.5" y="0.5" rx="20" width="${w - 1}" height="${h - 1}" fill="none" stroke="${THEME.border}"/>
 
-export function renderStats(d) {
-  const rows = [
-    ["star", "Total stars", d.stars],
-    ["commit", "Commits (past year)", d.commits],
-    ["pr", "Pull requests", d.pullRequests],
-    ["issue", "Issues", d.issues],
-    ["repo", "Contributed to", d.contributedTo],
-    ["people", "Followers", d.followers],
-  ];
-  const body = rows
-    .map(
-      ([icon, label, value], i) => `  <g class="fade" style="animation-delay:${150 + i * 120}ms" transform="translate(25, ${62 + i * 25})">
-    <path d="${ICONS[icon]}" fill="${THEME.icon}" transform="translate(0,-12)"/>
-    <text x="26" y="0" class="label">${label}:</text>
-    <text x="205" y="0" class="value">${fmt(value)}</text>
-  </g>`,
-    )
-    .join("\n");
-  return card(400, 215, `${d.name}'s GitHub stats`, body);
+  <g class="rise" style="animation-delay:0ms">
+    <rect x="60" y="56" rx="18" width="356" height="36" fill="${THEME.surface}" stroke="${THEME.border}"/>
+    <circle class="pulse" cx="80" cy="74" r="5" fill="${THEME.live}"/>
+    <text x="96" y="80" class="pill">Frontend Engineer at Plane · India</text>
+  </g>
+  <text x="56" y="182" class="name rise" style="animation-delay:120ms">Atul Tameshwari</text>
+  <text x="60" y="240" class="tag rise" style="animation-delay:240ms">Building interfaces that feel <tspan class="serif" fill="url(#ember)">inevitable.</tspan></text>
+  <text x="60" y="306" class="meta rise" style="animation-delay:360ms">design systems  /  accessibility  /  ai-driven ux</text>
+</svg>
+`;
 }
 
-export function renderLanguages(d, count = 8) {
+export function renderStats(d) {
+  const tiles = [
+    ["Commits", d.commits, "past year"],
+    ["Pull requests", d.pullRequests, "all time"],
+    ["Contributed to", d.contributedTo, "repositories"],
+    ["Stars", d.stars, "earned"],
+    ["Issues", d.issues, "opened"],
+    ["Followers", d.followers, "on GitHub"],
+  ];
+  const body = tiles
+    .map(([label, value, hint], i) => {
+      const col = i % 3;
+      const row = Math.floor(i / 3);
+      return `  <g transform="translate(${28 + col * 122}, ${94 + row * 86})"><g class="rise" style="animation-delay:${100 + i * 80}ms">
+    <text x="0" y="0" class="num">${value >= 10000 ? compact(value) : fmt(value)}</text>
+    <text x="0" y="22" class="text">${label}</text>
+    <text x="0" y="38" class="mono">${hint}</text>
+  </g></g>`;
+    })
+    .join("\n");
+  return card(400, 270, "GitHub stats", body);
+}
+
+export function renderLanguages(d, count = 6) {
   const top = d.languages.slice(0, count);
   const total = top.reduce((sum, l) => sum + l.size, 0) || 1;
-  const barWidth = 300;
+  const barWidth = 344;
+  const gap = 3;
   let x = 0;
   const segments = top
-    .map((l) => {
-      const w = (l.size / total) * barWidth;
-      const seg = `<rect x="${x.toFixed(2)}" y="0" width="${w.toFixed(2)}" height="8" fill="${l.color}"/>`;
-      x += w;
+    .map((l, i) => {
+      const w = Math.max(2, (l.size / total) * barWidth - gap);
+      const seg = `<rect x="${x.toFixed(2)}" y="0" width="${w.toFixed(2)}" height="10" rx="2" fill="${RAMP[i]}"/>`;
+      x += w + gap;
       return seg;
     })
     .join("");
@@ -161,25 +244,24 @@ export function renderLanguages(d, count = 8) {
       const col = i % 2;
       const row = Math.floor(i / 2);
       const pct = ((l.size / total) * 100).toFixed(1);
-      return `  <g class="fade" style="animation-delay:${150 + i * 100}ms" transform="translate(${25 + col * 160}, ${85 + row * 25})">
-    <circle cx="5" cy="-4" r="5" fill="${l.color}"/>
-    <text x="16" y="0" class="small">${esc(l.name)} ${pct}%</text>
-  </g>`;
+      const x0 = 28 + col * 180;
+      return `  <g transform="translate(${x0}, ${122 + row * 40})"><g class="rise" style="animation-delay:${100 + i * 70}ms">
+    <rect x="0" y="-9" width="10" height="10" rx="2" fill="${RAMP[i]}"/>
+    <text x="20" y="0" class="text" style="fill:${THEME.text}">${esc(l.name)}</text>
+    <text x="164" y="0" class="mono" text-anchor="end">${pct}%</text>
+  </g></g>`;
     })
     .join("\n");
-  const rows = Math.ceil(top.length / 2);
-  const height = Math.max(215, 85 + rows * 25 + 10);
-  const body = `  <clipPath id="bar"><rect x="0" y="0" width="${barWidth}" height="8" rx="4"/></clipPath>
-  <g clip-path="url(#bar)" transform="translate(25, 55)">${segments}</g>
+  const body = `  <g transform="translate(28, 66)">${segments}</g>
 ${legend}`;
-  return card(350, height, "Most used languages", body);
+  return card(400, 270, "Top languages", body);
 }
 
 export function renderActivity(d, days = 31) {
   const data = d.days.slice(-days);
-  const width = 850;
-  const height = 300;
-  const pad = { top: 60, right: 30, bottom: 45, left: 50 };
+  const width = 1000;
+  const height = 320;
+  const pad = { top: 104, right: 32, bottom: 44, left: 56 };
   const w = width - pad.left - pad.right;
   const h = height - pad.top - pad.bottom;
   const max = Math.max(4, ...data.map((p) => p.contributionCount));
@@ -187,48 +269,59 @@ export function renderActivity(d, days = 31) {
   const yMax = step * 4;
   const xAt = (i) => pad.left + (data.length > 1 ? (i / (data.length - 1)) * w : w / 2);
   const yAt = (v) => pad.top + h - (v / yMax) * h;
+  const total = data.reduce((sum, p) => sum + p.contributionCount, 0);
 
-  const points = data.map((p, i) => `${xAt(i).toFixed(1)},${yAt(p.contributionCount).toFixed(1)}`);
-  const line = points.join(" ");
-  const area = `${pad.left},${pad.top + h} ${line} ${xAt(data.length - 1).toFixed(1)},${pad.top + h}`;
+  // Smooth the line with a Catmull-Rom spline converted to cubic Béziers, clamped so it never dips below zero.
+  const pts = data.map((p, i) => [xAt(i), yAt(p.contributionCount)]);
+  const floor = pad.top + h;
+  let path = pts.length ? `M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}` : "";
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] ?? pts[i];
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const p3 = pts[i + 2] ?? p2;
+    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, Math.min(floor, p1[1] + (p2[1] - p0[1]) / 6)];
+    const c2 = [p2[0] - (p3[0] - p1[0]) / 6, Math.min(floor, p2[1] - (p3[1] - p1[1]) / 6)];
+    path += ` C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;
+  }
+  const last = pts[pts.length - 1] ?? [pad.left, floor];
+  const area = `${path} L${last[0].toFixed(1)},${floor} L${pad.left},${floor} Z`;
 
   const grid = [0, 1, 2, 3, 4]
     .map((k) => {
       const v = k * step;
       const y = yAt(v).toFixed(1);
-      return `  <line x1="${pad.left}" x2="${width - pad.right}" y1="${y}" y2="${y}" stroke="${THEME.grid}"/>
-  <text x="${pad.left - 10}" y="${y}" class="small" text-anchor="end" dominant-baseline="middle">${v}</text>`;
+      return `  <line x1="${pad.left}" x2="${width - pad.right}" y1="${y}" y2="${y}" stroke="${THEME.grid}" ${k ? 'stroke-dasharray="3 5"' : ""}/>
+  <text x="${pad.left - 14}" y="${y}" class="mono" text-anchor="end" dominant-baseline="middle">${v}</text>`;
     })
     .join("\n");
 
+  const month = (iso) => new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
   const xLabels = data
     .map((p, i) =>
-      i % 5 === 0 || i === data.length - 1
-        ? `  <text x="${xAt(i).toFixed(1)}" y="${height - 20}" class="small" text-anchor="middle">${Number(p.date.slice(8, 10))}</text>`
+      i % 6 === 0 || i === data.length - 1
+        ? `  <text x="${xAt(i).toFixed(1)}" y="${height - 16}" class="mono" text-anchor="${i === data.length - 1 ? "end" : i === 0 ? "start" : "middle"}">${month(p.date)}</text>`
         : "",
     )
     .filter(Boolean)
     .join("\n");
 
-  const dots = data
-    .map((p, i) => `<circle cx="${xAt(i).toFixed(1)}" cy="${yAt(p.contributionCount).toFixed(1)}" r="3" fill="${THEME.icon}"/>`)
-    .join("");
-
-  const body = `  <defs>
-    <linearGradient id="fill" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="${THEME.title}" stop-opacity="0.45"/>
-      <stop offset="100%" stop-color="${THEME.title}" stop-opacity="0"/>
-    </linearGradient>
-  </defs>
+  const body = `  <text x="${width - 32}" y="50" class="num" text-anchor="end">${fmt(total)}</text>
+  <text x="${width - 32}" y="72" class="mono" text-anchor="end">contributions · last ${days} days</text>
 ${grid}
-  <g class="fade" style="animation-delay:150ms">
-    <polygon points="${area}" fill="url(#fill)"/>
-    <polyline points="${line}" fill="none" stroke="${THEME.title}" stroke-width="2.5" stroke-linejoin="round"/>
-    ${dots}
+  <g class="rise" style="animation-delay:150ms">
+    <path d="${area}" fill="url(#area)"/>
+    <path d="${path}" fill="none" stroke="url(#ember)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="10" fill="${THEME.accent}" fill-opacity="0.2"/>
+    <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="4.5" fill="${THEME.accent}" stroke="${THEME.surface}" stroke-width="2"/>
   </g>
-${xLabels}
-  <text x="${width / 2}" y="${height - 4}" class="small" text-anchor="middle">Days</text>`;
-  return card(width, height, `${d.name}'s contribution graph (last ${days} days)`, body);
+${xLabels}`;
+  const defs = `
+    <linearGradient id="area" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="${THEME.accent}" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="${THEME.accent}" stop-opacity="0"/>
+    </linearGradient>`;
+  return card(width, height, "Contribution activity", body, { defs });
 }
 
 async function main() {
@@ -239,6 +332,7 @@ async function main() {
   const data = await fetchData(token, login);
   await mkdir(OUT_DIR, { recursive: true });
   await Promise.all([
+    writeFile(`${OUT_DIR}/header.svg`, renderHeader()),
     writeFile(`${OUT_DIR}/github-stats.svg`, renderStats(data)),
     writeFile(`${OUT_DIR}/top-languages.svg`, renderLanguages(data)),
     writeFile(`${OUT_DIR}/activity-graph.svg`, renderActivity(data)),
