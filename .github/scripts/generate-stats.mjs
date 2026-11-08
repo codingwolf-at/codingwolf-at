@@ -23,6 +23,10 @@ const SANS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, A
 const MONO = "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace";
 const SERIF = "'Instrument Serif', 'Iowan Old Style', Georgia, 'Times New Roman', serif";
 // Language bar and legend use one warm ramp instead of GitHub's rainbow of language colors.
+// Stats and languages cards sit side by side and together match the 1000px-wide activity graph.
+const CARD_W = 492;
+const CARD_H = 270;
+const CARD_GAP = 16;
 const RAMP = ["#ff7a45", "#ffa06e", "#ffc59d", "#d4d4d8", "#a1a1aa", "#71717a"];
 
 const QUERY = `
@@ -215,20 +219,20 @@ export function renderStats(d) {
     .map(([label, value, hint], i) => {
       const col = i % 3;
       const row = Math.floor(i / 3);
-      return `  <g transform="translate(${28 + col * 122}, ${94 + row * 86})"><g class="rise" style="animation-delay:${100 + i * 80}ms">
+      return `  <g transform="translate(${28 + col * 150}, ${94 + row * 86})"><g class="rise" style="animation-delay:${100 + i * 80}ms">
     <text x="0" y="0" class="num">${value >= 10000 ? compact(value) : fmt(value)}</text>
     <text x="0" y="22" class="text">${label}</text>
     <text x="0" y="38" class="mono">${hint}</text>
   </g></g>`;
     })
     .join("\n");
-  return card(400, 270, "GitHub stats", body);
+  return card(CARD_W, CARD_H, "GitHub stats", body);
 }
 
 export function renderLanguages(d, count = 6) {
   const top = d.languages.slice(0, count);
   const total = top.reduce((sum, l) => sum + l.size, 0) || 1;
-  const barWidth = 344;
+  const barWidth = CARD_W - 56;
   const gap = 3;
   let x = 0;
   const segments = top
@@ -244,17 +248,33 @@ export function renderLanguages(d, count = 6) {
       const col = i % 2;
       const row = Math.floor(i / 2);
       const pct = ((l.size / total) * 100).toFixed(1);
-      const x0 = 28 + col * 180;
+      const x0 = 28 + col * 226;
       return `  <g transform="translate(${x0}, ${122 + row * 40})"><g class="rise" style="animation-delay:${100 + i * 70}ms">
     <rect x="0" y="-9" width="10" height="10" rx="2" fill="${RAMP[i]}"/>
     <text x="20" y="0" class="text" style="fill:${THEME.text}">${esc(l.name)}</text>
-    <text x="164" y="0" class="mono" text-anchor="end">${pct}%</text>
+    <text x="200" y="0" class="mono" text-anchor="end">${pct}%</text>
   </g></g>`;
     })
     .join("\n");
   const body = `  <g transform="translate(28, 66)">${segments}</g>
 ${legend}`;
-  return card(400, 270, "Top languages", body);
+  return card(CARD_W, CARD_H, "Top languages", body);
+}
+
+// Stats and languages side by side in one image, so the row is exactly as wide as the cards below it.
+export function renderOverview(d) {
+  const nest = (svg, prefix, x) =>
+    svg
+      .trim()
+      .replace(/^<svg xmlns="http:\/\/www.w3.org\/2000\/svg"/, `<svg x="${x}" y="0"`)
+      .replace(/id="([\w-]+)"/g, `id="${prefix}-$1"`)
+      .replace(/url\(#([\w-]+)\)/g, `url(#${prefix}-$1)`);
+  const width = CARD_W * 2 + CARD_GAP;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${CARD_H}" viewBox="0 0 ${width} ${CARD_H}" role="img" aria-label="GitHub stats and top languages">
+${nest(renderStats(d), "stats", 0)}
+${nest(renderLanguages(d), "langs", CARD_W + CARD_GAP)}
+</svg>
+`;
 }
 
 export function renderActivity(d, days = 31) {
@@ -333,8 +353,7 @@ async function main() {
   await mkdir(OUT_DIR, { recursive: true });
   await Promise.all([
     writeFile(`${OUT_DIR}/header.svg`, renderHeader()),
-    writeFile(`${OUT_DIR}/github-stats.svg`, renderStats(data)),
-    writeFile(`${OUT_DIR}/top-languages.svg`, renderLanguages(data)),
+    writeFile(`${OUT_DIR}/overview.svg`, renderOverview(data)),
     writeFile(`${OUT_DIR}/activity-graph.svg`, renderActivity(data)),
   ]);
   console.log(`Wrote stats for ${login} to ${OUT_DIR}/`);
