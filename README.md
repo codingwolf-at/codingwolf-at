@@ -66,20 +66,19 @@ const atul = {
 
 ## Activity
 
-<div align="center">
+<p align="center">
+  <img width="100%" src="./assets/overview.svg" alt="GitHub stats and top languages" />
+</p>
 
-<img width="49%" src="./assets/github-stats.svg" alt="GitHub stats" />
-<img width="49%" src="./assets/top-languages.svg" alt="Top languages" />
+<p align="center">
+  <img width="100%" src="https://streak-stats.demolab.com?user=codingwolf-at&border=232327&border_radius=14&background=111113&stroke=232327&ring=FF7A45&fire=FF7A45&currStreakNum=FAFAFA&sideNums=FAFAFA&currStreakLabel=FF7A45&sideLabels=A1A1AA&dates=71717A" alt="GitHub streak" />
+</p>
 
-<img src="https://streak-stats.demolab.com?user=codingwolf-at&hide_border=true&border_radius=14&background=111113&stroke=232327&ring=FF7A45&fire=FF7A45&currStreakNum=FAFAFA&sideNums=FAFAFA&currStreakLabel=FF7A45&sideLabels=A1A1AA&dates=71717A" width="100%" alt="GitHub streak" />
+<p align="center">
+  <img width="100%" src="./assets/activity-graph.svg" alt="Contribution graph" />
+</p>
 
-<img width="100%" src="./assets/activity-graph.svg" alt="Contribution graph" />
-
-</div>
-
-<div align="center">
-
-<img src="https://komarev.com/ghpvc/?username=codingwolf-at&style=flat-square&color=ff7a45&labelColor=18181b&label=profile+views" alt="Profile views" />
-
-</div>
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=codingwolf-at&style=flat-square&color=ff7a45&labelColor=18181b&label=profile+views" alt="Profile views" />
+</p>
 
