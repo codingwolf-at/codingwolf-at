@@ -56,11 +56,11 @@ const atul = {
 
 **Frontend**
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=react,nextjs,ts,js,tailwind,sass,html,css&perline=8&theme=dark" /><img src="https://skillicons.dev/icons?i=react,nextjs,ts,js,tailwind,sass,html,css&perline=8&theme=light" alt="Frontend stack" /></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=react%2Cnextjs%2Cts%2Cjs%2Ctailwind%2Csass%2Chtml%2Ccss&perline=8&theme=dark" /><img src="https://skillicons.dev/icons?i=react,nextjs,ts,js,tailwind,sass,html,css&perline=8&theme=light" alt="Frontend stack" /></picture>
 
 **Backend, native and tools**
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=nodejs,supabase,swift,vite,vitest,git,github,figma,vercel&perline=9&theme=dark" /><img src="https://skillicons.dev/icons?i=nodejs,supabase,swift,vite,vitest,git,github,figma,vercel&perline=9&theme=light" alt="Backend, native and tools" /></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=nodejs%2Csupabase%2Cswift%2Cvite%2Cvitest%2Cgit%2Cgithub%2Cfigma%2Cvercel&perline=9&theme=dark" /><img src="https://skillicons.dev/icons?i=nodejs,supabase,swift,vite,vitest,git,github,figma,vercel&perline=9&theme=light" alt="Backend, native and tools" /></picture>
 
 </div>
 
