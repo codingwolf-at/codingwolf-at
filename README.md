@@ -1,11 +1,11 @@
-<a href="https://atul-portfolio-v3.vercel.app/"><img src="./assets/header.svg" width="100%" alt="Atul Tameshwari, Frontend Engineer at Plane. Building interfaces that feel inevitable." /></a>
+<a href="https://atul-portfolio-v3.vercel.app/"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/header-dark.svg" /><img src="./assets/header.svg" width="100%" alt="Atul Tameshwari, Frontend Engineer at Plane. Building interfaces that feel inevitable." /></picture></a>
 
 <div align="center">
 
-<a href="https://atul-portfolio-v3.vercel.app/"><img src="https://img.shields.io/badge/Portfolio-191919?style=for-the-badge&logo=vercel&logoColor=fafafa" alt="Portfolio" /></a>
-<a href="https://linkedin.com/in/atul-tameshwari"><img src="https://img.shields.io/badge/LinkedIn-191919?style=for-the-badge&logo=linkedin&logoColor=fafafa" alt="LinkedIn" /></a>
-<a href="https://x.com/atulT09"><img src="https://img.shields.io/badge/X-191919?style=for-the-badge&logo=x&logoColor=fafafa" alt="X" /></a>
-<a href="https://instagram.com/atul.jsx"><img src="https://img.shields.io/badge/Instagram-191919?style=for-the-badge&logo=instagram&logoColor=fafafa" alt="Instagram" /></a>
+<a href="https://atul-portfolio-v3.vercel.app/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Portfolio-2f2f2f?style=for-the-badge&logo=vercel&logoColor=ededed" /><img src="https://img.shields.io/badge/Portfolio-191919?style=for-the-badge&logo=vercel&logoColor=fafafa" alt="Portfolio" /></picture></a>
+<a href="https://linkedin.com/in/atul-tameshwari"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/LinkedIn-2f2f2f?style=for-the-badge&logo=linkedin&logoColor=ededed" /><img src="https://img.shields.io/badge/LinkedIn-191919?style=for-the-badge&logo=linkedin&logoColor=fafafa" alt="LinkedIn" /></picture></a>
+<a href="https://x.com/atulT09"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/X-2f2f2f?style=for-the-badge&logo=x&logoColor=ededed" /><img src="https://img.shields.io/badge/X-191919?style=for-the-badge&logo=x&logoColor=fafafa" alt="X" /></picture></a>
+<a href="https://instagram.com/atul.jsx"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Instagram-2f2f2f?style=for-the-badge&logo=instagram&logoColor=ededed" /><img src="https://img.shields.io/badge/Instagram-191919?style=for-the-badge&logo=instagram&logoColor=fafafa" alt="Instagram" /></picture></a>
 
 </div>
 
@@ -56,26 +56,26 @@ const atul = {
 
 **Frontend**
 
-<img src="https://skillicons.dev/icons?i=react,nextjs,ts,js,tailwind,sass,html,css&perline=8&theme=light" alt="Frontend stack" />
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=react,nextjs,ts,js,tailwind,sass,html,css&perline=8&theme=dark" /><img src="https://skillicons.dev/icons?i=react,nextjs,ts,js,tailwind,sass,html,css&perline=8&theme=light" alt="Frontend stack" /></picture>
 
 **Backend, native and tools**
 
-<img src="https://skillicons.dev/icons?i=nodejs,supabase,swift,vite,vitest,git,github,figma,vercel&perline=9&theme=light" alt="Backend, native and tools" />
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=nodejs,supabase,swift,vite,vitest,git,github,figma,vercel&perline=9&theme=dark" /><img src="https://skillicons.dev/icons?i=nodejs,supabase,swift,vite,vitest,git,github,figma,vercel&perline=9&theme=light" alt="Backend, native and tools" /></picture>
 
 </div>
 
 ## Activity
 
 <p align="center">
-  <img width="100%" src="./assets/overview.svg" alt="GitHub stats and top languages" />
+  <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/overview-dark.svg" /><img width="100%" src="./assets/overview.svg" alt="GitHub stats and top languages" /></picture>
 </p>
 
 <p align="center">
-  <img width="100%" src="https://streak-stats.demolab.com?user=codingwolf-at&border=E9E9E7&border_radius=8&background=FFFFFF&stroke=E9E9E7&ring=191919&fire=191919&currStreakNum=191919&sideNums=191919&currStreakLabel=191919&sideLabels=787774&dates=9B9A97" alt="GitHub streak" />
+  <picture><source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=codingwolf-at&border=2F2F2F&border_radius=8&background=191919&stroke=2F2F2F&ring=EDEDED&fire=EDEDED&currStreakNum=EDEDED&sideNums=EDEDED&currStreakLabel=EDEDED&sideLabels=9B9B9B&dates=6F6F6F" /><img width="100%" src="https://streak-stats.demolab.com?user=codingwolf-at&border=E9E9E7&border_radius=8&background=FFFFFF&stroke=E9E9E7&ring=191919&fire=191919&currStreakNum=191919&sideNums=191919&currStreakLabel=191919&sideLabels=787774&dates=9B9A97" alt="GitHub streak" /></picture>
 </p>
 
 <p align="center">
-  <img width="100%" src="./assets/activity-graph.svg" alt="Contribution graph" />
+  <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/activity-graph-dark.svg" /><img width="100%" src="./assets/activity-graph.svg" alt="Contribution graph" /></picture>
 </p>
 
 <p align="center">

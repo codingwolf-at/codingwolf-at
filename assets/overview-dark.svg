@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="270" viewBox="0 0 1000 270" role="img" aria-label="GitHub stats and top languages">
+<svg x="0" y="0" width="492" height="270" viewBox="0 0 492 270" role="img" aria-label="GitHub stats">
+  <style>
+    .label { font: 600 14px ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif; fill: #ededed; }
+    .num { font: 700 30px ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif; fill: #ededed; letter-spacing: -0.8px; }
+    .text { font: 400 13px ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif; fill: #9b9b9b; }
+    .meta { font: 400 12px ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif; fill: #6f6f6f; font-variant-numeric: tabular-nums; }
+    .rise { opacity: 0; animation: rise 0.6s cubic-bezier(0.21, 0.47, 0.32, 0.98) forwards; }
+    @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .rise { animation: none; opacity: 1; } }
+  </style>
+  <defs>
+  </defs>
+  <rect x="0.5" y="0.5" rx="8" width="491" height="269" fill="#191919" stroke="#2f2f2f"/>
+  <text x="28" y="38" class="label">GitHub stats</text>
+  <g transform="translate(28, 94)"><g class="rise" style="animation-delay:100ms">
+    <text x="0" y="0" class="num">1,069</text>
+    <text x="0" y="22" class="text">Commits</text>
+    <text x="0" y="38" class="meta">past year</text>
+  </g></g>
+  <g transform="translate(178, 94)"><g class="rise" style="animation-delay:180ms">
+    <text x="0" y="0" class="num">71</text>
+    <text x="0" y="22" class="text">Pull requests</text>
+    <text x="0" y="38" class="meta">all time</text>
+  </g></g>
+  <g transform="translate(328, 94)"><g class="rise" style="animation-delay:260ms">
+    <text x="0" y="0" class="num">3</text>
+    <text x="0" y="22" class="text">Contributed to</text>
+    <text x="0" y="38" class="meta">repositories</text>
+  </g></g>
+  <g transform="translate(28, 180)"><g class="rise" style="animation-delay:340ms">
+    <text x="0" y="0" class="num">2</text>
+    <text x="0" y="22" class="text">Stars</text>
+    <text x="0" y="38" class="meta">earned</text>
+  </g></g>
+  <g transform="translate(178, 180)"><g class="rise" style="animation-delay:420ms">
+    <text x="0" y="0" class="num">3</text>
+    <text x="0" y="22" class="text">Issues</text>
+    <text x="0" y="38" class="meta">opened</text>
+  </g></g>
+  <g transform="translate(328, 180)"><g class="rise" style="animation-delay:500ms">
+    <text x="0" y="0" class="num">27</text>
+    <text x="0" y="22" class="text">Followers</text>
+    <text x="0" y="38" class="meta">on GitHub</text>
+  </g></g>
+</svg>
+<svg x="508" y="0" width="492" height="270" viewBox="0 0 492 270" role="img" aria-label="Top languages">
+  <style>
+    .label { font: 600 14px ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif; fill: #ededed; }
+    .num { font: 700 30px ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif; fill: #ededed; letter-spacing: -0.8px; }
+    .text { font: 400 13px ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif; fill: #9b9b9b; }
+    .meta { font: 400 12px ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif; fill: #6f6f6f; font-variant-numeric: tabular-nums; }
+    .rise { opacity: 0; animation: rise 0.6s cubic-bezier(0.21, 0.47, 0.32, 0.98) forwards; }
+    @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .rise { animation: none; opacity: 1; } }
+  </style>
+  <defs>
+  </defs>
+  <rect x="0.5" y="0.5" rx="8" width="491" height="269" fill="#191919" stroke="#2f2f2f"/>
+  <text x="28" y="38" class="label">Top languages</text>
+  <g transform="translate(28, 72)"><rect x="0.00" y="0" width="197.68" height="10" rx="2" fill="#ededed"/><rect x="200.68" y="0" width="100.93" height="10" rx="2" fill="#bebebe"/><rect x="304.62" y="0" width="60.27" height="10" rx="2" fill="#919191"/><rect x="367.88" y="0" width="43.23" height="10" rx="2" fill="#6c6c6c"/><rect x="414.12" y="0" width="14.51" height="10" rx="2" fill="#4f4f4f"/><rect x="431.63" y="0" width="2.00" height="10" rx="2" fill="#3a3a3a"/></g>
+  <g transform="translate(28, 128)"><g class="rise" style="animation-delay:100ms">
+    <rect x="0" y="-9" width="10" height="10" rx="2" fill="#ededed"/>
+    <text x="20" y="0" class="text" style="fill:#ededed">Swift</text>
+    <text x="200" y="0" class="meta" text-anchor="end">46.0%</text>
+  </g></g>
+  <g transform="translate(254, 128)"><g class="rise" style="animation-delay:170ms">
+    <rect x="0" y="-9" width="10" height="10" rx="2" fill="#bebebe"/>
+    <text x="20" y="0" class="text" style="fill:#ededed">JavaScript</text>
+    <text x="200" y="0" class="meta" text-anchor="end">23.8%</text>
+  </g></g>
+  <g transform="translate(28, 168)"><g class="rise" style="animation-delay:240ms">
+    <rect x="0" y="-9" width="10" height="10" rx="2" fill="#919191"/>
+    <text x="20" y="0" class="text" style="fill:#ededed">TypeScript</text>
+    <text x="200" y="0" class="meta" text-anchor="end">14.5%</text>
+  </g></g>
+  <g transform="translate(254, 168)"><g class="rise" style="animation-delay:310ms">
+    <rect x="0" y="-9" width="10" height="10" rx="2" fill="#6c6c6c"/>
+    <text x="20" y="0" class="text" style="fill:#ededed">HTML</text>
+    <text x="200" y="0" class="meta" text-anchor="end">10.6%</text>
+  </g></g>
+  <g transform="translate(28, 208)"><g class="rise" style="animation-delay:380ms">
+    <rect x="0" y="-9" width="10" height="10" rx="2" fill="#4f4f4f"/>
+    <text x="20" y="0" class="text" style="fill:#ededed">CSS</text>
+    <text x="200" y="0" class="meta" text-anchor="end">4.0%</text>
+  </g></g>
+  <g transform="translate(254, 208)"><g class="rise" style="animation-delay:450ms">
+    <rect x="0" y="-9" width="10" height="10" rx="2" fill="#3a3a3a"/>
+    <text x="20" y="0" class="text" style="fill:#ededed">Shell</text>
+    <text x="200" y="0" class="meta" text-anchor="end">1.0%</text>
+  </g></g>
+</svg>
+</svg>
