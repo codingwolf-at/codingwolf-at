@@ -5,26 +5,45 @@ import { pathToFileURL } from "node:url";
 
 const OUT_DIR = "assets";
 
-// Notion-style black and white: white pages, near-black ink, warm grays, hairline borders.
-const THEME = {
-  bg: "#ffffff",
-  surface: "#ffffff",
-  cover: "#f7f7f5",
-  border: "#e9e9e7",
-  grid: "#efefed",
-  tag: "#f1f1ef",
-  text: "#191919",
-  muted: "#787774",
-  subtle: "#9b9a97",
+// Notion-style black and white, in light and dark. Each SVG is written once per theme and the README
+// picks one with <picture>, following the viewer's GitHub theme.
+// Language bar and legend use one grayscale ramp instead of GitHub's rainbow of language colors.
+const THEMES = {
+  light: {
+    bg: "#ffffff",
+    surface: "#ffffff",
+    cover: "#f7f7f5",
+    border: "#e9e9e7",
+    grid: "#efefed",
+    tag: "#f1f1ef",
+    text: "#191919",
+    muted: "#787774",
+    subtle: "#9b9a97",
+    dots: 0.13,
+    wash: 0.08,
+    ramp: ["#191919", "#4a4947", "#787774", "#a5a4a1", "#c9c8c5", "#e3e2df"],
+  },
+  dark: {
+    bg: "#191919",
+    surface: "#191919",
+    cover: "#202020",
+    border: "#2f2f2f",
+    grid: "#262626",
+    tag: "#2f2f2f",
+    text: "#ededed",
+    muted: "#9b9b9b",
+    subtle: "#6f6f6f",
+    dots: 0.12,
+    wash: 0.1,
+    ramp: ["#ededed", "#bebebe", "#919191", "#6c6c6c", "#4f4f4f", "#3a3a3a"],
+  },
 };
 const SANS = "ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif";
 const SERIF = "'Lyon-Text', 'Iowan Old Style', Georgia, ui-serif, 'Times New Roman', serif";
-// Language bar and legend use one grayscale ramp instead of GitHub's rainbow of language colors.
 // Stats and languages cards sit side by side and together match the 1000px-wide activity graph.
 const CARD_W = 492;
 const CARD_H = 270;
 const CARD_GAP = 16;
-const RAMP = ["#191919", "#4a4947", "#787774", "#a5a4a1", "#c9c8c5", "#e3e2df"];
 
 const QUERY = `
 query ($login: String!, $after: String) {
@@ -107,22 +126,22 @@ const esc = (s) =>
 const fmt = (n) => new Intl.NumberFormat("en-US").format(n);
 const compact = (n) => new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 }).format(n);
 
-const BASE_STYLE = `
-    .label { font: 600 14px ${SANS}; fill: ${THEME.text}; }
-    .num { font: 700 30px ${SANS}; fill: ${THEME.text}; letter-spacing: -0.8px; }
-    .text { font: 400 13px ${SANS}; fill: ${THEME.muted}; }
-    .meta { font: 400 12px ${SANS}; fill: ${THEME.subtle}; font-variant-numeric: tabular-nums; }
+const baseStyle = (t) => `
+    .label { font: 600 14px ${SANS}; fill: ${t.text}; }
+    .num { font: 700 30px ${SANS}; fill: ${t.text}; letter-spacing: -0.8px; }
+    .text { font: 400 13px ${SANS}; fill: ${t.muted}; }
+    .meta { font: 400 12px ${SANS}; fill: ${t.subtle}; font-variant-numeric: tabular-nums; }
     .rise { opacity: 0; animation: rise 0.6s cubic-bezier(0.21, 0.47, 0.32, 0.98) forwards; }
     @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
     @media (prefers-reduced-motion: reduce) { .rise { animation: none; opacity: 1; } }`;
 
-function card(width, height, label, body, { extraStyle = "", defs = "" } = {}) {
+function card(t, width, height, label, body, { extraStyle = "", defs = "" } = {}) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(label)}">
-  <style>${BASE_STYLE}${extraStyle}
+  <style>${baseStyle(t)}${extraStyle}
   </style>
   <defs>${defs}
   </defs>
-  <rect x="0.5" y="0.5" rx="8" width="${width - 1}" height="${height - 1}" fill="${THEME.surface}" stroke="${THEME.border}"/>
+  <rect x="0.5" y="0.5" rx="8" width="${width - 1}" height="${height - 1}" fill="${t.surface}" stroke="${t.border}"/>
   <text x="28" y="38" class="label">${esc(label)}</text>
 ${body}
 </svg>
@@ -139,7 +158,7 @@ const ICONS = {
 };
 
 // A Notion page: cover, page icon, title, then a few properties.
-export function renderHeader() {
+export function renderHeader(t = THEMES.light) {
   const w = 1000;
   const h = 420;
   const coverH = 150;
@@ -156,14 +175,14 @@ export function renderHeader() {
         ? value
             .map((tag) => {
               const tw = tagWidth(tag);
-              const pill = `<rect x="${x}" y="${y - 16}" width="${tw}" height="22" rx="4" fill="${THEME.tag}"/><text x="${x + 8}" y="${y}" class="tagtext">${esc(tag)}</text>`;
+              const pill = `<rect x="${x}" y="${y - 16}" width="${tw}" height="22" rx="4" fill="${t.tag}"/><text x="${x + 8}" y="${y}" class="tagtext">${esc(tag)}</text>`;
               x += tw + 6;
               return pill;
             })
             .join("")
         : `<text x="${x}" y="${y}" class="value">${esc(value)}</text>`;
       return `  <g class="rise" style="animation-delay:${360 + i * 80}ms">
-    <g transform="translate(60, ${y - 12})" fill="none" stroke="${THEME.muted}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${ICONS[icon]}</g>
+    <g transform="translate(60, ${y - 12})" fill="none" stroke="${t.muted}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${ICONS[icon]}</g>
     <text x="84" y="${y}" class="prop">${label}</text>
     ${val}
   </g>`;
@@ -171,14 +190,14 @@ export function renderHeader() {
     .join("\n");
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="Atul Tameshwari, Frontend Engineer at Plane. Building interfaces that feel inevitable.">
   <style>
-    .icon { font: 700 30px ${SANS}; fill: ${THEME.text}; letter-spacing: -1px; }
-    .name { font: 700 50px ${SANS}; fill: ${THEME.text}; letter-spacing: -1.5px; }
-    .tag { font: 400 22px ${SANS}; fill: ${THEME.muted}; }
-    .serif { font: italic 400 25px ${SERIF}; fill: ${THEME.text}; }
-    .caret { font: 300 24px ${SANS}; fill: ${THEME.text}; animation: blink 1.1s steps(1) infinite; }
-    .prop { font: 400 15px ${SANS}; fill: ${THEME.muted}; }
-    .value { font: 400 15px ${SANS}; fill: ${THEME.text}; }
-    .tagtext { font: 400 13px ${SANS}; fill: ${THEME.text}; }
+    .icon { font: 700 30px ${SANS}; fill: ${t.text}; letter-spacing: -1px; }
+    .name { font: 700 50px ${SANS}; fill: ${t.text}; letter-spacing: -1.5px; }
+    .tag { font: 400 22px ${SANS}; fill: ${t.muted}; }
+    .serif { font: italic 400 25px ${SERIF}; fill: ${t.text}; }
+    .caret { font: 300 24px ${SANS}; fill: ${t.text}; animation: blink 1.1s steps(1) infinite; }
+    .prop { font: 400 15px ${SANS}; fill: ${t.muted}; }
+    .value { font: 400 15px ${SANS}; fill: ${t.text}; }
+    .tagtext { font: 400 13px ${SANS}; fill: ${t.text}; }
     .rise { opacity: 0; animation: rise 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98) forwards; }
     .float { animation: float 6s ease-in-out infinite; }
     .float2 { animation: float 7s ease-in-out -2s infinite reverse; }
@@ -189,7 +208,7 @@ export function renderHeader() {
   </style>
   <defs>
     <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="1" fill="${THEME.text}" fill-opacity="0.13"/>
+      <circle cx="2" cy="2" r="1" fill="${t.text}" fill-opacity="${t.dots}"/>
     </pattern>
     <linearGradient id="fadeX" x1="0" x2="1">
       <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
@@ -199,21 +218,21 @@ export function renderHeader() {
     <clipPath id="frame"><rect x="0.5" y="0.5" rx="8" width="${w - 1}" height="${h - 1}"/></clipPath>
   </defs>
   <g clip-path="url(#frame)">
-    <rect width="${w}" height="${h}" fill="${THEME.bg}"/>
-    <rect width="${w}" height="${coverH}" fill="${THEME.cover}"/>
+    <rect width="${w}" height="${h}" fill="${t.bg}"/>
+    <rect width="${w}" height="${coverH}" fill="${t.cover}"/>
     <rect width="${w}" height="${coverH}" fill="url(#dots)" mask="url(#fade)"/>
-    <line x1="0" x2="${w}" y1="${coverH}" y2="${coverH}" stroke="${THEME.border}"/>
-    <g fill="${THEME.bg}" stroke="${THEME.text}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="0" x2="${w}" y1="${coverH}" y2="${coverH}" stroke="${t.border}"/>
+    <g fill="${t.bg}" stroke="${t.text}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <g class="float"><circle cx="742" cy="82" r="30"/></g>
       <g class="float2"><rect x="806" y="40" width="58" height="58" rx="6" transform="rotate(12 835 69)"/></g>
       <g class="float"><path d="M890 112 l26 -46 l26 46 z"/></g>
       <path d="M660 122 q14 -16 28 0 t28 0 t28 0" fill="none"/>
     </g>
   </g>
-  <rect x="0.5" y="0.5" rx="8" width="${w - 1}" height="${h - 1}" fill="none" stroke="${THEME.border}"/>
+  <rect x="0.5" y="0.5" rx="8" width="${w - 1}" height="${h - 1}" fill="none" stroke="${t.border}"/>
 
   <g class="rise" style="animation-delay:0ms">
-    <rect x="60" y="108" width="76" height="76" rx="10" fill="${THEME.bg}" stroke="${THEME.border}"/>
+    <rect x="60" y="108" width="76" height="76" rx="10" fill="${t.bg}" stroke="${t.border}"/>
     <text x="98" y="157" class="icon" text-anchor="middle">AT</text>
   </g>
   <text x="56" y="252" class="name rise" style="animation-delay:120ms">Atul Tameshwari</text>
@@ -223,7 +242,7 @@ ${rows}
 `;
 }
 
-export function renderStats(d) {
+export function renderStats(d, t = THEMES.light) {
   const tiles = [
     ["Commits", d.commits, "past year"],
     ["Pull requests", d.pullRequests, "all time"],
@@ -243,10 +262,10 @@ export function renderStats(d) {
   </g></g>`;
     })
     .join("\n");
-  return card(CARD_W, CARD_H, "GitHub stats", body);
+  return card(t, CARD_W, CARD_H, "GitHub stats", body);
 }
 
-export function renderLanguages(d, count = 6) {
+export function renderLanguages(d, t = THEMES.light, count = 6) {
   const top = d.languages.slice(0, count);
   const total = top.reduce((sum, l) => sum + l.size, 0) || 1;
   const barWidth = CARD_W - 56;
@@ -255,7 +274,7 @@ export function renderLanguages(d, count = 6) {
   const segments = top
     .map((l, i) => {
       const w = Math.max(2, (l.size / total) * barWidth - gap);
-      const seg = `<rect x="${x.toFixed(2)}" y="0" width="${w.toFixed(2)}" height="10" rx="2" fill="${RAMP[i]}"/>`;
+      const seg = `<rect x="${x.toFixed(2)}" y="0" width="${w.toFixed(2)}" height="10" rx="2" fill="${t.ramp[i]}"/>`;
       x += w + gap;
       return seg;
     })
@@ -267,19 +286,19 @@ export function renderLanguages(d, count = 6) {
       const pct = ((l.size / total) * 100).toFixed(1);
       const x0 = 28 + col * 226;
       return `  <g transform="translate(${x0}, ${128 + row * 40})"><g class="rise" style="animation-delay:${100 + i * 70}ms">
-    <rect x="0" y="-9" width="10" height="10" rx="2" fill="${RAMP[i]}"/>
-    <text x="20" y="0" class="text" style="fill:${THEME.text}">${esc(l.name)}</text>
+    <rect x="0" y="-9" width="10" height="10" rx="2" fill="${t.ramp[i]}"/>
+    <text x="20" y="0" class="text" style="fill:${t.text}">${esc(l.name)}</text>
     <text x="200" y="0" class="meta" text-anchor="end">${pct}%</text>
   </g></g>`;
     })
     .join("\n");
   const body = `  <g transform="translate(28, 72)">${segments}</g>
 ${legend}`;
-  return card(CARD_W, CARD_H, "Top languages", body);
+  return card(t, CARD_W, CARD_H, "Top languages", body);
 }
 
 // Stats and languages side by side in one image, so the row is exactly as wide as the cards below it.
-export function renderOverview(d) {
+export function renderOverview(d, t = THEMES.light) {
   const nest = (svg, prefix, x) =>
     svg
       .trim()
@@ -288,13 +307,13 @@ export function renderOverview(d) {
       .replace(/url\(#([\w-]+)\)/g, `url(#${prefix}-$1)`);
   const width = CARD_W * 2 + CARD_GAP;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${CARD_H}" viewBox="0 0 ${width} ${CARD_H}" role="img" aria-label="GitHub stats and top languages">
-${nest(renderStats(d), "stats", 0)}
-${nest(renderLanguages(d), "langs", CARD_W + CARD_GAP)}
+${nest(renderStats(d, t), "stats", 0)}
+${nest(renderLanguages(d, t), "langs", CARD_W + CARD_GAP)}
 </svg>
 `;
 }
 
-export function renderActivity(d, days = 31) {
+export function renderActivity(d, t = THEMES.light, days = 31) {
   const data = d.days.slice(-days);
   const width = 1000;
   const height = 320;
@@ -328,7 +347,7 @@ export function renderActivity(d, days = 31) {
     .map((k) => {
       const v = k * step;
       const y = yAt(v).toFixed(1);
-      return `  <line x1="${pad.left}" x2="${width - pad.right}" y1="${y}" y2="${y}" stroke="${THEME.grid}" ${k ? 'stroke-dasharray="3 5"' : ""}/>
+      return `  <line x1="${pad.left}" x2="${width - pad.right}" y1="${y}" y2="${y}" stroke="${t.grid}" ${k ? 'stroke-dasharray="3 5"' : ""}/>
   <text x="${pad.left - 14}" y="${y}" class="meta" text-anchor="end" dominant-baseline="middle">${v}</text>`;
     })
     .join("\n");
@@ -348,17 +367,17 @@ export function renderActivity(d, days = 31) {
 ${grid}
   <g class="rise" style="animation-delay:150ms">
     <path d="${area}" fill="url(#area)"/>
-    <path d="${path}" fill="none" stroke="${THEME.text}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="10" fill="${THEME.text}" fill-opacity="0.08"/>
-    <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="4.5" fill="${THEME.text}" stroke="${THEME.surface}" stroke-width="2"/>
+    <path d="${path}" fill="none" stroke="${t.text}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="10" fill="${t.text}" fill-opacity="${t.wash}"/>
+    <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="4.5" fill="${t.text}" stroke="${t.surface}" stroke-width="2"/>
   </g>
 ${xLabels}`;
   const defs = `
     <linearGradient id="area" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="${THEME.text}" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="${THEME.text}" stop-opacity="0"/>
+      <stop offset="0%" stop-color="${t.text}" stop-opacity="${t.wash}"/>
+      <stop offset="100%" stop-color="${t.text}" stop-opacity="0"/>
     </linearGradient>`;
-  return card(width, height, "Contribution activity", body, { defs });
+  return card(t, width, height, "Contribution activity", body, { defs });
 }
 
 async function main() {
@@ -368,11 +387,14 @@ async function main() {
 
   const data = await fetchData(token, login);
   await mkdir(OUT_DIR, { recursive: true });
-  await Promise.all([
-    writeFile(`${OUT_DIR}/header.svg`, renderHeader()),
-    writeFile(`${OUT_DIR}/overview.svg`, renderOverview(data)),
-    writeFile(`${OUT_DIR}/activity-graph.svg`, renderActivity(data)),
-  ]);
+  const variants = [["", THEMES.light], ["-dark", THEMES.dark]];
+  await Promise.all(
+    variants.flatMap(([suffix, t]) => [
+      writeFile(`${OUT_DIR}/header${suffix}.svg`, renderHeader(t)),
+      writeFile(`${OUT_DIR}/overview${suffix}.svg`, renderOverview(data, t)),
+      writeFile(`${OUT_DIR}/activity-graph${suffix}.svg`, renderActivity(data, t)),
+    ]),
+  );
   console.log(`Wrote stats for ${login} to ${OUT_DIR}/`);
 }
 
