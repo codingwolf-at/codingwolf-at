@@ -5,29 +5,26 @@ import { pathToFileURL } from "node:url";
 
 const OUT_DIR = "assets";
 
-// Near-black, monochrome surfaces with a single warm "ember" accent.
+// Notion-style black and white: white pages, near-black ink, warm grays, hairline borders.
 const THEME = {
-  bg: "#0a0a0b",
-  surface: "#111113",
-  border: "#232327",
-  grid: "#1c1c20",
-  text: "#fafafa",
-  muted: "#a1a1aa",
-  subtle: "#71717a",
-  accent: "#ff7a45",
-  accentFrom: "#ffb36b",
-  accentTo: "#ff5a36",
-  live: "#34d399",
+  bg: "#ffffff",
+  surface: "#ffffff",
+  cover: "#f7f7f5",
+  border: "#e9e9e7",
+  grid: "#efefed",
+  tag: "#f1f1ef",
+  text: "#191919",
+  muted: "#787774",
+  subtle: "#9b9a97",
 };
-const SANS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif";
-const MONO = "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace";
-const SERIF = "'Instrument Serif', 'Iowan Old Style', Georgia, 'Times New Roman', serif";
-// Language bar and legend use one warm ramp instead of GitHub's rainbow of language colors.
+const SANS = "ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif";
+const SERIF = "'Lyon-Text', 'Iowan Old Style', Georgia, ui-serif, 'Times New Roman', serif";
+// Language bar and legend use one grayscale ramp instead of GitHub's rainbow of language colors.
 // Stats and languages cards sit side by side and together match the 1000px-wide activity graph.
 const CARD_W = 492;
 const CARD_H = 270;
 const CARD_GAP = 16;
-const RAMP = ["#ff7a45", "#ffa06e", "#ffc59d", "#d4d4d8", "#a1a1aa", "#71717a"];
+const RAMP = ["#191919", "#4a4947", "#787774", "#a5a4a1", "#c9c8c5", "#e3e2df"];
 
 const QUERY = `
 query ($login: String!, $after: String) {
@@ -111,10 +108,10 @@ const fmt = (n) => new Intl.NumberFormat("en-US").format(n);
 const compact = (n) => new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 }).format(n);
 
 const BASE_STYLE = `
-    .label { font: 500 12px ${MONO}; fill: ${THEME.subtle}; letter-spacing: 1.5px; text-transform: uppercase; }
-    .num { font: 650 30px ${SANS}; fill: ${THEME.text}; letter-spacing: -1px; }
+    .label { font: 600 14px ${SANS}; fill: ${THEME.text}; }
+    .num { font: 700 30px ${SANS}; fill: ${THEME.text}; letter-spacing: -0.8px; }
     .text { font: 400 13px ${SANS}; fill: ${THEME.muted}; }
-    .mono { font: 400 12px ${MONO}; fill: ${THEME.subtle}; }
+    .meta { font: 400 12px ${SANS}; fill: ${THEME.subtle}; font-variant-numeric: tabular-nums; }
     .rise { opacity: 0; animation: rise 0.6s cubic-bezier(0.21, 0.47, 0.32, 0.98) forwards; }
     @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
     @media (prefers-reduced-motion: reduce) { .rise { animation: none; opacity: 1; } }`;
@@ -123,85 +120,105 @@ function card(width, height, label, body, { extraStyle = "", defs = "" } = {}) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(label)}">
   <style>${BASE_STYLE}${extraStyle}
   </style>
-  <defs>
-    <linearGradient id="ember" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0%" stop-color="${THEME.accentFrom}"/>
-      <stop offset="100%" stop-color="${THEME.accentTo}"/>
-    </linearGradient>
-    <radialGradient id="glow" cx="100%" cy="0%" r="70%">
-      <stop offset="0%" stop-color="${THEME.accent}" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="${THEME.accent}" stop-opacity="0"/>
-    </radialGradient>${defs}
+  <defs>${defs}
   </defs>
-  <rect x="0.5" y="0.5" rx="14" width="${width - 1}" height="${height - 1}" fill="${THEME.surface}" stroke="${THEME.border}"/>
-  <rect x="0.5" y="0.5" rx="14" width="${width - 1}" height="${height - 1}" fill="url(#glow)"/>
-  <circle cx="28" cy="32" r="3" fill="${THEME.accent}"/>
-  <text x="40" y="36" class="label">${esc(label)}</text>
+  <rect x="0.5" y="0.5" rx="8" width="${width - 1}" height="${height - 1}" fill="${THEME.surface}" stroke="${THEME.border}"/>
+  <text x="28" y="38" class="label">${esc(label)}</text>
 ${body}
 </svg>
 `;
 }
 
+// Roughly 13px sans glyph width, used to size the tag pills around their labels.
+const tagWidth = (label) => Math.round(label.length * 6.6 + 16);
+
+const ICONS = {
+  role: `<rect x="0.7" y="3.2" width="12.6" height="9.6" rx="2"/><path d="M4.8 3.2V1.6h4.4v1.6M0.7 7.4h12.6"/>`,
+  location: `<path d="M7 13.2s4.6-4.1 4.6-7.6a4.6 4.6 0 0 0-9.2 0c0 3.5 4.6 7.6 4.6 7.6z"/><circle cx="7" cy="5.6" r="1.6"/>`,
+  focus: `<path d="M5 2.5h8M5 7h8M5 11.5h8"/><circle cx="1.6" cy="2.5" r="0.6"/><circle cx="1.6" cy="7" r="0.6"/><circle cx="1.6" cy="11.5" r="0.6"/>`,
+};
+
+// A Notion page: cover, page icon, title, then a few properties.
 export function renderHeader() {
   const w = 1000;
-  const h = 360;
-  const rings = [60, 100, 140, 180]
-    .map((r, i) => `<circle cx="850" cy="180" r="${r}" fill="none" stroke="${THEME.text}" stroke-opacity="${0.09 - i * 0.015}"/>`)
-    .join("\n    ");
+  const h = 420;
+  const coverH = 150;
+  const props = [
+    ["role", "Role", "Frontend Engineer at Plane"],
+    ["location", "Location", "Hyderabad, India"],
+    ["focus", "Focus", ["Design systems", "Accessibility", "AI-driven UX"]],
+  ];
+  const rows = props
+    .map(([icon, label, value], i) => {
+      const y = 336 + i * 32;
+      let x = 196;
+      const val = Array.isArray(value)
+        ? value
+            .map((tag) => {
+              const tw = tagWidth(tag);
+              const pill = `<rect x="${x}" y="${y - 16}" width="${tw}" height="22" rx="4" fill="${THEME.tag}"/><text x="${x + 8}" y="${y}" class="tagtext">${esc(tag)}</text>`;
+              x += tw + 6;
+              return pill;
+            })
+            .join("")
+        : `<text x="${x}" y="${y}" class="value">${esc(value)}</text>`;
+      return `  <g class="rise" style="animation-delay:${360 + i * 80}ms">
+    <g transform="translate(60, ${y - 12})" fill="none" stroke="${THEME.muted}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${ICONS[icon]}</g>
+    <text x="84" y="${y}" class="prop">${label}</text>
+    ${val}
+  </g>`;
+    })
+    .join("\n");
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="Atul Tameshwari, Frontend Engineer at Plane. Building interfaces that feel inevitable.">
   <style>
-    .pill { font: 500 17px ${SANS}; fill: ${THEME.muted}; }
-    .name { font: 700 76px ${SANS}; fill: ${THEME.text}; letter-spacing: -3px; }
-    .tag { font: 400 34px ${SANS}; fill: ${THEME.muted}; letter-spacing: -0.5px; }
-    .serif { font: italic 400 38px ${SERIF}; }
-    .meta { font: 400 17px ${MONO}; fill: ${THEME.subtle}; letter-spacing: 0.5px; }
+    .icon { font: 700 30px ${SANS}; fill: ${THEME.text}; letter-spacing: -1px; }
+    .name { font: 700 50px ${SANS}; fill: ${THEME.text}; letter-spacing: -1.5px; }
+    .tag { font: 400 22px ${SANS}; fill: ${THEME.muted}; }
+    .serif { font: italic 400 25px ${SERIF}; fill: ${THEME.text}; }
+    .caret { font: 300 24px ${SANS}; fill: ${THEME.text}; animation: blink 1.1s steps(1) infinite; }
+    .prop { font: 400 15px ${SANS}; fill: ${THEME.muted}; }
+    .value { font: 400 15px ${SANS}; fill: ${THEME.text}; }
+    .tagtext { font: 400 13px ${SANS}; fill: ${THEME.text}; }
     .rise { opacity: 0; animation: rise 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98) forwards; }
-    .pulse { animation: pulse 2s ease-in-out infinite; transform-origin: 77px 74px; }
-    .orbit { animation: spin 18s linear infinite; transform-origin: 850px 180px; }
-    .orbit2 { animation: spin 30s linear infinite reverse; transform-origin: 850px 180px; }
-    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    @media (prefers-reduced-motion: reduce) { .rise, .pulse, .orbit, .orbit2 { animation: none; opacity: 1; } }
+    .float { animation: float 6s ease-in-out infinite; }
+    .float2 { animation: float 7s ease-in-out -2s infinite reverse; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @keyframes blink { 50% { fill-opacity: 0; } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @media (prefers-reduced-motion: reduce) { .rise, .caret, .float, .float2 { animation: none; opacity: 1; } }
   </style>
   <defs>
-    <linearGradient id="ember" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0%" stop-color="${THEME.accentFrom}"/>
-      <stop offset="100%" stop-color="${THEME.accentTo}"/>
-    </linearGradient>
-    <radialGradient id="glow" cx="88%" cy="0%" r="75%">
-      <stop offset="0%" stop-color="${THEME.accent}" stop-opacity="0.28"/>
-      <stop offset="45%" stop-color="${THEME.accent}" stop-opacity="0.06"/>
-      <stop offset="100%" stop-color="${THEME.accent}" stop-opacity="0"/>
-    </radialGradient>
-    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="1" fill="${THEME.text}" fill-opacity="0.07"/>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="${THEME.text}" fill-opacity="0.13"/>
     </pattern>
     <linearGradient id="fadeX" x1="0" x2="1">
       <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
       <stop offset="100%" stop-color="#fff" stop-opacity="1"/>
     </linearGradient>
-    <mask id="fade"><rect width="${w}" height="${h}" fill="url(#fadeX)"/></mask>
-    <clipPath id="frame"><rect x="0.5" y="0.5" rx="20" width="${w - 1}" height="${h - 1}"/></clipPath>
+    <mask id="fade"><rect width="${w}" height="${coverH}" fill="url(#fadeX)"/></mask>
+    <clipPath id="frame"><rect x="0.5" y="0.5" rx="8" width="${w - 1}" height="${h - 1}"/></clipPath>
   </defs>
   <g clip-path="url(#frame)">
     <rect width="${w}" height="${h}" fill="${THEME.bg}"/>
-    <rect width="${w}" height="${h}" fill="url(#dots)" mask="url(#fade)"/>
-    <rect width="${w}" height="${h}" fill="url(#glow)"/>
-    ${rings}
-    <g class="orbit"><circle cx="850" cy="40" r="5" fill="${THEME.accent}"/><circle cx="850" cy="40" r="12" fill="${THEME.accent}" fill-opacity="0.18"/></g>
-    <g class="orbit2"><circle cx="850" cy="280" r="3" fill="${THEME.text}" fill-opacity="0.5"/></g>
+    <rect width="${w}" height="${coverH}" fill="${THEME.cover}"/>
+    <rect width="${w}" height="${coverH}" fill="url(#dots)" mask="url(#fade)"/>
+    <line x1="0" x2="${w}" y1="${coverH}" y2="${coverH}" stroke="${THEME.border}"/>
+    <g fill="${THEME.bg}" stroke="${THEME.text}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <g class="float"><circle cx="742" cy="82" r="30"/></g>
+      <g class="float2"><rect x="806" y="40" width="58" height="58" rx="6" transform="rotate(12 835 69)"/></g>
+      <g class="float"><path d="M890 112 l26 -46 l26 46 z"/></g>
+      <path d="M660 122 q14 -16 28 0 t28 0 t28 0" fill="none"/>
+    </g>
   </g>
-  <rect x="0.5" y="0.5" rx="20" width="${w - 1}" height="${h - 1}" fill="none" stroke="${THEME.border}"/>
+  <rect x="0.5" y="0.5" rx="8" width="${w - 1}" height="${h - 1}" fill="none" stroke="${THEME.border}"/>
 
   <g class="rise" style="animation-delay:0ms">
-    <rect x="60" y="56" rx="18" width="356" height="36" fill="${THEME.surface}" stroke="${THEME.border}"/>
-    <circle class="pulse" cx="80" cy="74" r="5" fill="${THEME.live}"/>
-    <text x="96" y="80" class="pill">Frontend Engineer at Plane · India</text>
+    <rect x="60" y="108" width="76" height="76" rx="10" fill="${THEME.bg}" stroke="${THEME.border}"/>
+    <text x="98" y="157" class="icon" text-anchor="middle">AT</text>
   </g>
-  <text x="56" y="182" class="name rise" style="animation-delay:120ms">Atul Tameshwari</text>
-  <text x="60" y="240" class="tag rise" style="animation-delay:240ms">Building interfaces that feel <tspan class="serif" fill="url(#ember)">inevitable.</tspan></text>
-  <text x="60" y="306" class="meta rise" style="animation-delay:360ms">design systems  /  accessibility  /  ai-driven ux</text>
+  <text x="56" y="252" class="name rise" style="animation-delay:120ms">Atul Tameshwari</text>
+  <text x="58" y="292" class="tag rise" style="animation-delay:240ms">Building interfaces that feel <tspan class="serif">inevitable.</tspan><tspan class="caret" dx="2">|</tspan></text>
+${rows}
 </svg>
 `;
 }
@@ -222,7 +239,7 @@ export function renderStats(d) {
       return `  <g transform="translate(${28 + col * 150}, ${94 + row * 86})"><g class="rise" style="animation-delay:${100 + i * 80}ms">
     <text x="0" y="0" class="num">${value >= 10000 ? compact(value) : fmt(value)}</text>
     <text x="0" y="22" class="text">${label}</text>
-    <text x="0" y="38" class="mono">${hint}</text>
+    <text x="0" y="38" class="meta">${hint}</text>
   </g></g>`;
     })
     .join("\n");
@@ -249,14 +266,14 @@ export function renderLanguages(d, count = 6) {
       const row = Math.floor(i / 2);
       const pct = ((l.size / total) * 100).toFixed(1);
       const x0 = 28 + col * 226;
-      return `  <g transform="translate(${x0}, ${122 + row * 40})"><g class="rise" style="animation-delay:${100 + i * 70}ms">
+      return `  <g transform="translate(${x0}, ${128 + row * 40})"><g class="rise" style="animation-delay:${100 + i * 70}ms">
     <rect x="0" y="-9" width="10" height="10" rx="2" fill="${RAMP[i]}"/>
     <text x="20" y="0" class="text" style="fill:${THEME.text}">${esc(l.name)}</text>
-    <text x="200" y="0" class="mono" text-anchor="end">${pct}%</text>
+    <text x="200" y="0" class="meta" text-anchor="end">${pct}%</text>
   </g></g>`;
     })
     .join("\n");
-  const body = `  <g transform="translate(28, 66)">${segments}</g>
+  const body = `  <g transform="translate(28, 72)">${segments}</g>
 ${legend}`;
   return card(CARD_W, CARD_H, "Top languages", body);
 }
@@ -312,7 +329,7 @@ export function renderActivity(d, days = 31) {
       const v = k * step;
       const y = yAt(v).toFixed(1);
       return `  <line x1="${pad.left}" x2="${width - pad.right}" y1="${y}" y2="${y}" stroke="${THEME.grid}" ${k ? 'stroke-dasharray="3 5"' : ""}/>
-  <text x="${pad.left - 14}" y="${y}" class="mono" text-anchor="end" dominant-baseline="middle">${v}</text>`;
+  <text x="${pad.left - 14}" y="${y}" class="meta" text-anchor="end" dominant-baseline="middle">${v}</text>`;
     })
     .join("\n");
 
@@ -320,26 +337,26 @@ export function renderActivity(d, days = 31) {
   const xLabels = data
     .map((p, i) =>
       i % 6 === 0 || i === data.length - 1
-        ? `  <text x="${xAt(i).toFixed(1)}" y="${height - 16}" class="mono" text-anchor="${i === data.length - 1 ? "end" : i === 0 ? "start" : "middle"}">${month(p.date)}</text>`
+        ? `  <text x="${xAt(i).toFixed(1)}" y="${height - 16}" class="meta" text-anchor="${i === data.length - 1 ? "end" : i === 0 ? "start" : "middle"}">${month(p.date)}</text>`
         : "",
     )
     .filter(Boolean)
     .join("\n");
 
   const body = `  <text x="${width - 32}" y="50" class="num" text-anchor="end">${fmt(total)}</text>
-  <text x="${width - 32}" y="72" class="mono" text-anchor="end">contributions · last ${days} days</text>
+  <text x="${width - 32}" y="72" class="meta" text-anchor="end">contributions · last ${days} days</text>
 ${grid}
   <g class="rise" style="animation-delay:150ms">
     <path d="${area}" fill="url(#area)"/>
-    <path d="${path}" fill="none" stroke="url(#ember)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="10" fill="${THEME.accent}" fill-opacity="0.2"/>
-    <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="4.5" fill="${THEME.accent}" stroke="${THEME.surface}" stroke-width="2"/>
+    <path d="${path}" fill="none" stroke="${THEME.text}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="10" fill="${THEME.text}" fill-opacity="0.08"/>
+    <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="4.5" fill="${THEME.text}" stroke="${THEME.surface}" stroke-width="2"/>
   </g>
 ${xLabels}`;
   const defs = `
     <linearGradient id="area" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="${THEME.accent}" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="${THEME.accent}" stop-opacity="0"/>
+      <stop offset="0%" stop-color="${THEME.text}" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="${THEME.text}" stop-opacity="0"/>
     </linearGradient>`;
   return card(width, height, "Contribution activity", body, { defs });
 }
