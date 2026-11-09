@@ -58,7 +58,7 @@
   </defs>
   <rect x="0.5" y="0.5" rx="8" width="491" height="269" fill="#191919" stroke="#2f2f2f"/>
   <text x="28" y="38" class="label">Top languages</text>
-  <g transform="translate(28, 72)"><rect x="0.00" y="0" width="197.76" height="10" rx="2" fill="#ededed"/><rect x="200.76" y="0" width="100.87" height="10" rx="2" fill="#bebebe"/><rect x="304.63" y="0" width="60.28" height="10" rx="2" fill="#919191"/><rect x="367.92" y="0" width="43.26" height="10" rx="2" fill="#6c6c6c"/><rect x="414.18" y="0" width="14.46" height="10" rx="2" fill="#4f4f4f"/><rect x="431.64" y="0" width="2.00" height="10" rx="2" fill="#3a3a3a"/></g>
+  <g transform="translate(28, 72)"><rect x="0.00" y="0" width="197.68" height="10" rx="2" fill="#ededed"/><rect x="200.68" y="0" width="100.93" height="10" rx="2" fill="#bebebe"/><rect x="304.62" y="0" width="60.27" height="10" rx="2" fill="#919191"/><rect x="367.88" y="0" width="43.23" height="10" rx="2" fill="#6c6c6c"/><rect x="414.12" y="0" width="14.51" height="10" rx="2" fill="#4f4f4f"/><rect x="431.63" y="0" width="2.00" height="10" rx="2" fill="#3a3a3a"/></g>
   <g transform="translate(28, 128)"><g class="rise" style="animation-delay:100ms">
     <rect x="0" y="-9" width="10" height="10" rx="2" fill="#ededed"/>
     <text x="20" y="0" class="text" style="fill:#ededed">Swift</text>
