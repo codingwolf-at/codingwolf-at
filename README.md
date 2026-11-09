@@ -2,10 +2,10 @@
 
 <div align="center">
 
-<a href="https://atul-portfolio-v3.vercel.app/"><img src="https://img.shields.io/badge/Portfolio-18181b?style=for-the-badge&logo=vercel&logoColor=fafafa" alt="Portfolio" /></a>
-<a href="https://linkedin.com/in/atul-tameshwari"><img src="https://img.shields.io/badge/LinkedIn-18181b?style=for-the-badge&logo=linkedin&logoColor=fafafa" alt="LinkedIn" /></a>
-<a href="https://x.com/atulT09"><img src="https://img.shields.io/badge/X-18181b?style=for-the-badge&logo=x&logoColor=fafafa" alt="X" /></a>
-<a href="https://instagram.com/atul.jsx"><img src="https://img.shields.io/badge/Instagram-18181b?style=for-the-badge&logo=instagram&logoColor=fafafa" alt="Instagram" /></a>
+<a href="https://atul-portfolio-v3.vercel.app/"><img src="https://img.shields.io/badge/Portfolio-191919?style=for-the-badge&logo=vercel&logoColor=fafafa" alt="Portfolio" /></a>
+<a href="https://linkedin.com/in/atul-tameshwari"><img src="https://img.shields.io/badge/LinkedIn-191919?style=for-the-badge&logo=linkedin&logoColor=fafafa" alt="LinkedIn" /></a>
+<a href="https://x.com/atulT09"><img src="https://img.shields.io/badge/X-191919?style=for-the-badge&logo=x&logoColor=fafafa" alt="X" /></a>
+<a href="https://instagram.com/atul.jsx"><img src="https://img.shields.io/badge/Instagram-191919?style=for-the-badge&logo=instagram&logoColor=fafafa" alt="Instagram" /></a>
 
 </div>
 
@@ -56,11 +56,11 @@ const atul = {
 
 **Frontend**
 
-<img src="https://skillicons.dev/icons?i=react,nextjs,ts,js,tailwind,sass,html,css&perline=8&theme=dark" alt="Frontend stack" />
+<img src="https://skillicons.dev/icons?i=react,nextjs,ts,js,tailwind,sass,html,css&perline=8&theme=light" alt="Frontend stack" />
 
 **Backend, native and tools**
 
-<img src="https://skillicons.dev/icons?i=nodejs,supabase,swift,vite,vitest,git,github,figma,vercel&perline=9&theme=dark" alt="Backend, native and tools" />
+<img src="https://skillicons.dev/icons?i=nodejs,supabase,swift,vite,vitest,git,github,figma,vercel&perline=9&theme=light" alt="Backend, native and tools" />
 
 </div>
 
@@ -71,7 +71,7 @@ const atul = {
 </p>
 
 <p align="center">
-  <img width="100%" src="https://streak-stats.demolab.com?user=codingwolf-at&border=232327&border_radius=14&background=111113&stroke=232327&ring=FF7A45&fire=FF7A45&currStreakNum=FAFAFA&sideNums=FAFAFA&currStreakLabel=FF7A45&sideLabels=A1A1AA&dates=71717A" alt="GitHub streak" />
+  <img width="100%" src="https://streak-stats.demolab.com?user=codingwolf-at&border=E9E9E7&border_radius=8&background=FFFFFF&stroke=E9E9E7&ring=191919&fire=191919&currStreakNum=191919&sideNums=191919&currStreakLabel=191919&sideLabels=787774&dates=9B9A97" alt="GitHub streak" />
 </p>
 
 <p align="center">
@@ -79,6 +79,6 @@ const atul = {
 </p>
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=codingwolf-at&style=flat-square&color=ff7a45&labelColor=18181b&label=profile+views" alt="Profile views" />
+  <img src="https://komarev.com/ghpvc/?username=codingwolf-at&style=flat-square&color=191919&labelColor=787774&label=profile+views" alt="Profile views" />
 </p>
 
