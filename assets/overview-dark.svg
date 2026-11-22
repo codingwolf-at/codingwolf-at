@@ -19,12 +19,12 @@
     <text x="0" y="38" class="meta">past year</text>
   </g></g>
   <g transform="translate(178, 94)"><g class="rise" style="animation-delay:180ms">
-    <text x="0" y="0" class="num">72</text>
+    <text x="0" y="0" class="num">74</text>
     <text x="0" y="22" class="text">Pull requests</text>
     <text x="0" y="38" class="meta">all time</text>
   </g></g>
   <g transform="translate(328, 94)"><g class="rise" style="animation-delay:260ms">
-    <text x="0" y="0" class="num">4</text>
+    <text x="0" y="0" class="num">5</text>
     <text x="0" y="22" class="text">Contributed to</text>
     <text x="0" y="38" class="meta">repositories</text>
   </g></g>
