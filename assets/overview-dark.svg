@@ -14,12 +14,12 @@
   <rect x="0.5" y="0.5" rx="8" width="491" height="269" fill="#191919" stroke="#2f2f2f"/>
   <text x="28" y="38" class="label">GitHub stats</text>
   <g transform="translate(28, 94)"><g class="rise" style="animation-delay:100ms">
-    <text x="0" y="0" class="num">1,231</text>
+    <text x="0" y="0" class="num">1,247</text>
     <text x="0" y="22" class="text">Commits</text>
     <text x="0" y="38" class="meta">past year</text>
   </g></g>
   <g transform="translate(178, 94)"><g class="rise" style="animation-delay:180ms">
-    <text x="0" y="0" class="num">74</text>
+    <text x="0" y="0" class="num">75</text>
     <text x="0" y="22" class="text">Pull requests</text>
     <text x="0" y="38" class="meta">all time</text>
   </g></g>
