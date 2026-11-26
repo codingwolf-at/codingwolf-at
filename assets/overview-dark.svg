@@ -14,12 +14,12 @@
   <rect x="0.5" y="0.5" rx="8" width="491" height="269" fill="#191919" stroke="#2f2f2f"/>
   <text x="28" y="38" class="label">GitHub stats</text>
   <g transform="translate(28, 94)"><g class="rise" style="animation-delay:100ms">
-    <text x="0" y="0" class="num">1,263</text>
+    <text x="0" y="0" class="num">1,345</text>
     <text x="0" y="22" class="text">Commits</text>
     <text x="0" y="38" class="meta">past year</text>
   </g></g>
   <g transform="translate(178, 94)"><g class="rise" style="animation-delay:180ms">
-    <text x="0" y="0" class="num">77</text>
+    <text x="0" y="0" class="num">79</text>
     <text x="0" y="22" class="text">Pull requests</text>
     <text x="0" y="38" class="meta">all time</text>
   </g></g>
@@ -58,36 +58,36 @@
   </defs>
   <rect x="0.5" y="0.5" rx="8" width="491" height="269" fill="#191919" stroke="#2f2f2f"/>
   <text x="28" y="38" class="label">Top languages</text>
-  <g transform="translate(28, 72)"><rect x="0.00" y="0" width="197.68" height="10" rx="2" fill="#ededed"/><rect x="200.68" y="0" width="100.93" height="10" rx="2" fill="#bebebe"/><rect x="304.62" y="0" width="60.27" height="10" rx="2" fill="#919191"/><rect x="367.88" y="0" width="43.23" height="10" rx="2" fill="#6c6c6c"/><rect x="414.12" y="0" width="14.51" height="10" rx="2" fill="#4f4f4f"/><rect x="431.63" y="0" width="2.00" height="10" rx="2" fill="#3a3a3a"/></g>
+  <g transform="translate(28, 72)"><rect x="0.00" y="0" width="185.59" height="10" rx="2" fill="#ededed"/><rect x="188.59" y="0" width="94.67" height="10" rx="2" fill="#bebebe"/><rect x="286.26" y="0" width="56.45" height="10" rx="2" fill="#919191"/><rect x="345.72" y="0" width="41.50" height="10" rx="2" fill="#6c6c6c"/><rect x="390.22" y="0" width="26.33" height="10" rx="2" fill="#4f4f4f"/><rect x="419.54" y="0" width="13.46" height="10" rx="2" fill="#3a3a3a"/></g>
   <g transform="translate(28, 128)"><g class="rise" style="animation-delay:100ms">
     <rect x="0" y="-9" width="10" height="10" rx="2" fill="#ededed"/>
     <text x="20" y="0" class="text" style="fill:#ededed">Swift</text>
-    <text x="200" y="0" class="meta" text-anchor="end">46.0%</text>
+    <text x="200" y="0" class="meta" text-anchor="end">43.3%</text>
   </g></g>
   <g transform="translate(254, 128)"><g class="rise" style="animation-delay:170ms">
     <rect x="0" y="-9" width="10" height="10" rx="2" fill="#bebebe"/>
     <text x="20" y="0" class="text" style="fill:#ededed">JavaScript</text>
-    <text x="200" y="0" class="meta" text-anchor="end">23.8%</text>
+    <text x="200" y="0" class="meta" text-anchor="end">22.4%</text>
   </g></g>
   <g transform="translate(28, 168)"><g class="rise" style="animation-delay:240ms">
     <rect x="0" y="-9" width="10" height="10" rx="2" fill="#919191"/>
     <text x="20" y="0" class="text" style="fill:#ededed">TypeScript</text>
-    <text x="200" y="0" class="meta" text-anchor="end">14.5%</text>
+    <text x="200" y="0" class="meta" text-anchor="end">13.6%</text>
   </g></g>
   <g transform="translate(254, 168)"><g class="rise" style="animation-delay:310ms">
     <rect x="0" y="-9" width="10" height="10" rx="2" fill="#6c6c6c"/>
     <text x="20" y="0" class="text" style="fill:#ededed">HTML</text>
-    <text x="200" y="0" class="meta" text-anchor="end">10.6%</text>
+    <text x="200" y="0" class="meta" text-anchor="end">10.2%</text>
   </g></g>
   <g transform="translate(28, 208)"><g class="rise" style="animation-delay:380ms">
     <rect x="0" y="-9" width="10" height="10" rx="2" fill="#4f4f4f"/>
-    <text x="20" y="0" class="text" style="fill:#ededed">CSS</text>
-    <text x="200" y="0" class="meta" text-anchor="end">4.0%</text>
+    <text x="20" y="0" class="text" style="fill:#ededed">Python</text>
+    <text x="200" y="0" class="meta" text-anchor="end">6.7%</text>
   </g></g>
   <g transform="translate(254, 208)"><g class="rise" style="animation-delay:450ms">
     <rect x="0" y="-9" width="10" height="10" rx="2" fill="#3a3a3a"/>
-    <text x="20" y="0" class="text" style="fill:#ededed">Shell</text>
-    <text x="200" y="0" class="meta" text-anchor="end">1.0%</text>
+    <text x="20" y="0" class="text" style="fill:#ededed">CSS</text>
+    <text x="200" y="0" class="meta" text-anchor="end">3.8%</text>
   </g></g>
 </svg>
 </svg>
